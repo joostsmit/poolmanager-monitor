@@ -1,0 +1,41 @@
+name: Poolmanager monitor
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"   # elke 5 minuten (GitHub kan wat later starten)
+  workflow_dispatch:        # handmatig starten via het tabblad Actions
+
+permissions:
+  contents: write           # nodig om seen.json op te slaan
+
+concurrency:
+  group: monitor
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Kalender controleren
+        env:
+          POOLMANAGER_USERNAME: ${{ secrets.POOLMANAGER_USERNAME }}
+          POOLMANAGER_PASSWORD: ${{ secrets.POOLMANAGER_PASSWORD }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python monitor.py
+
+      - name: Gezien-lijst opslaan
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add seen.json
+          git diff --cached --quiet || (git commit -m "Gezien-lijst bijgewerkt" && git push)
