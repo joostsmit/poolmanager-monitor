@@ -1,4 +1,4 @@
-name: Poolmanager monitor
+name: Poolmanager monitor 
 
 on:
   schedule:
