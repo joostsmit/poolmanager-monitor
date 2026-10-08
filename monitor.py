@@ -139,7 +139,8 @@ def summary(seen, open_count):
         f"Sinds {since:%H:%M} ({'vandaag' if since.date() == now.date() else 'gisteren'}):",
         f"- {checks}x gecontroleerd",
         f"- {found} nieuwe opdracht(en) gevonden",
-        f"Nu open: {open_count} opdracht(en)",
+        "",
+        f"Je kunt je nu nog inschrijven op {open_count} opdracht(en) (komende {MONTHS} maanden).",
     ]
     if failed:
         lines.append(f"Let op: {failed} controle(s) mislukt")
