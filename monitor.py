@@ -10,6 +10,8 @@ import json
 import os
 import re
 import sys
+from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 
 import requests
 from bs4 import BeautifulSoup
@@ -20,6 +22,8 @@ AGENDA_URL = BASE + "/uiweb/emp/EmployeeAgenda.aspx"
 NEXT_BUTTON = "ctl00$ctl00$MasterContentPlaceHolder$ContentPlaceHolder1$MonthCalendar$btnNext"
 MONTHS = int(os.environ.get("MONTHS_AHEAD", "3"))  # aantal maanden om te bekijken
 SEEN_FILE = "seen.json"
+TZ = ZoneInfo("Europe/Amsterdam")
+SUMMARY_HOURS = (12, 18)  # tijden van het dagelijkse overzicht
 
 
 def form_fields(soup, form_id):
@@ -84,20 +88,69 @@ def fetch_items(session):
     return all_items
 
 
-def notify(items):
+def send(title, body):
     topic = os.environ.get("NTFY_TOPIC")
     if not topic:
-        print("Geen NTFY_TOPIC ingesteld, geen melding verstuurd.")
+        print(f"Geen NTFY_TOPIC ingesteld, niet verstuurd: {title}\n{body}")
         return
-    lines = [f"{i['datum']} {i['tijd']} - {i['titel']} ({i['info']})" for i in items]
-    title = f"{len(items)} nieuwe opdracht(en) in Poolmanager"
     requests.post(
         f"https://ntfy.sh/{topic}",
-        data="\n".join(lines).encode("utf-8"),
+        data=body.encode("utf-8"),
         headers={"Title": title, "Click": AGENDA_URL, "Tags": "swimmer"},
         timeout=30,
     ).raise_for_status()
     print("Melding verstuurd:", title)
+
+
+def notify(items):
+    lines = [f"{i['datum']} {i['tijd']} - {i['titel']} ({i['info']})" for i in items]
+    send(f"{len(items)} nieuwe opdracht(en) in Poolmanager", "\n".join(lines))
+
+
+def count_runs(since):
+    """Aantal geslaagde en mislukte runs van deze workflow sinds 'since' (via GitHub API)."""
+    token, repo = os.environ.get("GITHUB_TOKEN"), os.environ.get("GITHUB_REPOSITORY")
+    if not token or not repo:
+        return None, None
+    url = f"https://api.github.com/repos/{repo}/actions/workflows/monitor.yml/runs"
+    counts = []
+    for status in ("success", "failure"):
+        r = requests.get(url, timeout=30, headers={"Authorization": f"Bearer {token}"}, params={
+            "created": ">=" + since.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "status": status, "per_page": 1,
+        })
+        r.raise_for_status()
+        counts.append(r.json()["total_count"])
+    return counts
+
+
+def summary(seen, open_count):
+    """Overzicht sinds het vorige overzichtsmoment."""
+    now = datetime.now(TZ)
+    slots = [
+        (now - timedelta(days=d)).replace(hour=h, minute=0, second=0, microsecond=0)
+        for d in (1, 0) for h in SUMMARY_HOURS
+    ]
+    since = max(t for t in slots if t < now.replace(minute=0, second=0, microsecond=0))
+    found = sum(1 for t in seen.values() if t and datetime.fromisoformat(t) >= since)
+    ok, failed = count_runs(since)
+    checks = "?" if ok is None else ok + 1  # +1 voor deze run
+    lines = [
+        f"Sinds {since:%H:%M} ({'vandaag' if since.date() == now.date() else 'gisteren'}):",
+        f"- {checks}x gecontroleerd",
+        f"- {found} nieuwe opdracht(en) gevonden",
+        f"Nu open: {open_count} opdracht(en)",
+    ]
+    if failed:
+        lines.append(f"Let op: {failed} controle(s) mislukt")
+    send(f"Poolmanager overzicht {now:%H:%M}", "\n".join(lines))
+
+
+def is_summary_time():
+    if os.environ.get("FORCE_SUMMARY") == "true":
+        return True
+    # De workflow start op meerdere UTC-tijden (zomer/wintertijd); alleen versturen op het juiste uur.
+    return os.environ.get("SUMMARY_SLOT") == "true" and datetime.now(TZ).hour in SUMMARY_HOURS
 
 
 def main():
@@ -107,7 +160,9 @@ def main():
     items = fetch_items(session)
 
     first_run = not os.path.exists(SEEN_FILE)
-    seen = [] if first_run else json.load(open(SEEN_FILE))
+    seen = {} if first_run else json.load(open(SEEN_FILE))
+    if isinstance(seen, list):  # oud formaat: alleen id's
+        seen = {k: "" for k in seen}
     new = [i for k, i in items.items() if k not in seen]
 
     if first_run:
@@ -117,10 +172,16 @@ def main():
     else:
         print("Geen nieuwe opdrachten.")
 
-    # Bewaar alles wat ooit gezien is (laatste 1000), zodat er geen dubbele meldingen komen.
-    seen = (seen + [k for k in items if k not in seen])[-1000:]
+    # Bewaar alles wat ooit gezien is, met het moment van vinden (laatste 1000).
+    now = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    for k in items:
+        seen.setdefault(k, "" if first_run else now)
+    seen = dict(list(seen.items())[-1000:])
     with open(SEEN_FILE, "w") as f:
         json.dump(seen, f, indent=1)
+
+    if is_summary_time():
+        summary(seen, len(items))
 
 
 if __name__ == "__main__":

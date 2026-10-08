@@ -3,10 +3,17 @@ name: Poolmanager monitor
 on:
   schedule:
     - cron: "*/5 * * * *"   # elke 5 minuten (GitHub kan wat later starten)
+    - cron: "2 10,11,16,17 * * *"  # overzicht om 12:00 en 18:00 NL-tijd (zomer- en wintertijd)
   workflow_dispatch:        # handmatig starten via het tabblad Actions
+    inputs:
+      overzicht:
+        description: "Ook het overzicht versturen"
+        type: boolean
+        default: false
 
 permissions:
   contents: write           # nodig om seen.json op te slaan
+  actions: read             # nodig om het aantal controles te tellen
 
 concurrency:
   group: monitor
@@ -31,6 +38,9 @@ jobs:
           POOLMANAGER_USERNAME: ${{ secrets.POOLMANAGER_USERNAME }}
           POOLMANAGER_PASSWORD: ${{ secrets.POOLMANAGER_PASSWORD }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          GITHUB_TOKEN: ${{ github.token }}
+          SUMMARY_SLOT: ${{ github.event.schedule == '2 10,11,16,17 * * *' }}
+          FORCE_SUMMARY: ${{ inputs.overzicht }}
         run: python monitor.py
 
       - name: Gezien-lijst opslaan
