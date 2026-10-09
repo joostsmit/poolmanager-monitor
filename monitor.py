@@ -103,8 +103,12 @@ def send(title, body):
     print("Melding verstuurd:", title)
 
 
+def describe(item):
+    return f"{item['datum']} {item['tijd']} - {item['titel']} ({item['info']})"
+
+
 def notify(items):
-    lines = [f"{i['datum']} {i['tijd']} - {i['titel']} ({i['info']})" for i in items]
+    lines = [describe(i) for i in items]
     send(f"{len(items)} nieuwe opdracht(en) in Poolmanager", "\n".join(lines))
 
 
@@ -125,21 +129,25 @@ def count_runs(since):
     return counts
 
 
-def summary(seen, open_count, forced):
+def summary(seen, items, forced):
     """Overzicht sinds het vorige overzichtsmoment."""
     now = datetime.now(TZ)
     current = current_slot(now)
     since = current if forced else max(t for t in slots(now) if t < current)
-    found = sum(1 for t in seen.values() if t and datetime.fromisoformat(t) >= since)
+    found = {k: v for k, v in seen.items() if v["gevonden"] and datetime.fromisoformat(v["gevonden"]) >= since}
     ok, failed = count_runs(since)
     checks = "?" if ok is None else ok + 1  # +1 voor deze run
     lines = [
         f"Sinds {since:%H:%M} ({'vandaag' if since.date() == now.date() else 'gisteren'}):",
         f"- {checks}x gecontroleerd",
-        f"- {found} nieuwe opdracht(en) gevonden",
-        "",
-        f"Je kunt je nu nog inschrijven op {open_count} opdracht(en) (komende {MONTHS} maanden).",
+        f"- {len(found)} nieuwe opdracht(en) gevonden" + (":" if found else ""),
     ]
+    lines += [
+        f"  • {v['tekst'] or 'onbekende opdracht'}" + ("" if k in items else " (al weg)")
+        for k, v in found.items()
+    ]
+    lines += ["", f"Je kunt je nu nog inschrijven op {len(items)} opdracht(en) (komende {MONTHS} maanden)" + (":" if items else ".")]
+    lines += [f"  • {describe(i)}" for i in items.values()]
     if failed:
         lines.append(f"Let op: {failed} controle(s) mislukt")
     send(f"Poolmanager overzicht {now:%H:%M}", "\n".join(lines))
@@ -178,6 +186,7 @@ def main():
     seen = {} if first_run else json.load(open(SEEN_FILE))
     if isinstance(seen, list):  # oud formaat: alleen id's
         seen = {k: "" for k in seen}
+    seen = {k: v if isinstance(v, dict) else {"gevonden": v, "tekst": ""} for k, v in seen.items()}
     new = [i for k, i in items.items() if k not in seen]
 
     if first_run:
@@ -187,17 +196,17 @@ def main():
     else:
         print("Geen nieuwe opdrachten.")
 
-    # Bewaar alles wat ooit gezien is, met het moment van vinden (laatste 1000).
+    # Bewaar alles wat ooit gezien is, met het moment van vinden en een omschrijving (laatste 1000).
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
-    for k in items:
-        seen.setdefault(k, "" if first_run else now)
+    for k, item in items.items():
+        seen.setdefault(k, {"gevonden": "" if first_run else now})["tekst"] = describe(item)
     seen = dict(list(seen.items())[-1000:])
     with open(SEEN_FILE, "w") as f:
         json.dump(seen, f, indent=1)
 
     forced = os.environ.get("FORCE_SUMMARY") == "true"
     if forced or summary_due():
-        summary(seen, len(items), forced)
+        summary(seen, items, forced)
 
 
 if __name__ == "__main__":
