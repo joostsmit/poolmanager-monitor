@@ -22,6 +22,7 @@ AGENDA_URL = BASE + "/uiweb/emp/EmployeeAgenda.aspx"
 NEXT_BUTTON = "ctl00$ctl00$MasterContentPlaceHolder$ContentPlaceHolder1$MonthCalendar$btnNext"
 MONTHS = int(os.environ.get("MONTHS_AHEAD", "3"))  # aantal maanden om te bekijken
 SEEN_FILE = "seen.json"
+SUMMARY_FILE = "last_summary.txt"  # moment van het laatst verstuurde overzicht
 TZ = ZoneInfo("Europe/Amsterdam")
 SUMMARY_HOURS = (12, 18)  # tijden van het dagelijkse overzicht
 
@@ -124,14 +125,11 @@ def count_runs(since):
     return counts
 
 
-def summary(seen, open_count):
+def summary(seen, open_count, forced):
     """Overzicht sinds het vorige overzichtsmoment."""
     now = datetime.now(TZ)
-    slots = [
-        (now - timedelta(days=d)).replace(hour=h, minute=0, second=0, microsecond=0)
-        for d in (1, 0) for h in SUMMARY_HOURS
-    ]
-    since = max(t for t in slots if t < now.replace(minute=0, second=0, microsecond=0))
+    current = current_slot(now)
+    since = current if forced else max(t for t in slots(now) if t < current)
     found = sum(1 for t in seen.values() if t and datetime.fromisoformat(t) >= since)
     ok, failed = count_runs(since)
     checks = "?" if ok is None else ok + 1  # +1 voor deze run
@@ -147,11 +145,27 @@ def summary(seen, open_count):
     send(f"Poolmanager overzicht {now:%H:%M}", "\n".join(lines))
 
 
-def is_summary_time():
-    if os.environ.get("FORCE_SUMMARY") == "true":
-        return True
-    # De workflow start op meerdere UTC-tijden (zomer/wintertijd); alleen versturen op het juiste uur.
-    return os.environ.get("SUMMARY_SLOT") == "true" and datetime.now(TZ).hour in SUMMARY_HOURS
+def slots(now):
+    """Overzichtsmomenten van gisteren en vandaag."""
+    return [
+        (now - timedelta(days=d)).replace(hour=h, minute=0, second=0, microsecond=0)
+        for d in (1, 0) for h in SUMMARY_HOURS
+    ]
+
+
+def current_slot(now):
+    return max(t for t in slots(now) if t <= now)
+
+
+def summary_due():
+    """True als het overzicht van het laatste overzichtsmoment nog niet verstuurd is (max. 3 uur te laat)."""
+    slot = current_slot(datetime.now(TZ))
+    last = open(SUMMARY_FILE).read().strip() if os.path.exists(SUMMARY_FILE) else ""
+    if last == slot.isoformat() or datetime.now(TZ) - slot > timedelta(hours=3):
+        return False
+    with open(SUMMARY_FILE, "w") as f:
+        f.write(slot.isoformat() + "\n")
+    return True
 
 
 def main():
@@ -181,8 +195,9 @@ def main():
     with open(SEEN_FILE, "w") as f:
         json.dump(seen, f, indent=1)
 
-    if is_summary_time():
-        summary(seen, len(items))
+    forced = os.environ.get("FORCE_SUMMARY") == "true"
+    if forced or summary_due():
+        summary(seen, len(items), forced)
 
 
 if __name__ == "__main__":
