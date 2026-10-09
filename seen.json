@@ -1,6 +1,18 @@
 {
- "73801": "",
- "75117": "",
- "74463": "2026-10-08T23:30:22+00:00",
- "72627": "2026-10-09T08:15:23+00:00"
+ "73801": {
+  "gevonden": "",
+  "tekst": "wo 14 oktober 2026 13:00-17:00 - Politieacademie Eindhoven (Inplanbaar Licht Fysiek)"
+ },
+ "75117": {
+  "gevonden": "",
+  "tekst": "do 22 oktober 2026 13:00-17:00 - OBT Noord Nederland (Inplanbaar Zwaar Fysiek)"
+ },
+ "74463": {
+  "gevonden": "2026-10-08T23:30:22+00:00",
+  "tekst": "wo 14 oktober 2026 15:00-21:00 - OBT Noord Nederland (Inplanbaar Zwaar Fysiek)"
+ },
+ "72627": {
+  "gevonden": "2026-10-09T08:15:23+00:00",
+  "tekst": "wo 14 oktober 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Regulier)"
+ }
 }
