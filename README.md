@@ -15,7 +15,10 @@ Kijkt elke 5 minuten (gestart via cron-job.org, zie stap 4) in je Poolmanager-ka
 2. Bedenk een topic-naam die niemand kan raden, bijv. `joost-pool-8f3k2q9x`.
    Let op: iedereen die deze naam kent, kan je meldingen lezen. Zie het als een wachtwoord.
 3. Open de app, tik op **+** (Subscribe to topic), vul je topic-naam in en tik op **Subscribe**.
-4. Testen: open `https://ntfy.sh/<jouw-topic>` in je browser en verstuur een testbericht. Dat moet binnenkomen op je telefoon.
+4. Meldingen over nieuwe opdrachten komen met **maximale prioriteit** (hard geluid). Wil je dat ze ook door *Niet storen* heen komen:
+   - **Android:** Instellingen → Apps → ntfy → Meldingen → kanaal *Max priority* → zet *Niet storen negeren* aan.
+   - **iPhone:** Instellingen → ntfy → Meldingen → zet *Tijdgevoelige meldingen* aan (als die optie er staat).
+5. Testen: open `https://ntfy.sh/<jouw-topic>` in je browser en verstuur een testbericht. Dat moet binnenkomen op je telefoon.
 
 ## 2. GitHub Secrets toevoegen
 

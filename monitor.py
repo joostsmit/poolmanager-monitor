@@ -115,8 +115,11 @@ def split(body):
     return ["\n".join(p) for p in parts]
 
 
-def send(title, body):
-    """Alle meldingen gaan via deze functie, zodat de groottegrens altijd geldt."""
+def send(title, body, priority="default"):
+    """Alle meldingen gaan via deze functie, zodat de groottegrens altijd geldt.
+
+    priority: ntfy-prioriteit ("default" of "max"). "max" = hard geluid en kan door Niet storen heen.
+    """
     topic = os.environ.get("NTFY_TOPIC")
     parts = split(body)
     for n, part in enumerate(parts, 1):
@@ -128,7 +131,7 @@ def send(title, body):
         requests.post(
             f"https://ntfy.sh/{topic}",
             data=part.encode("utf-8"),
-            headers={"Title": part_title, "Click": AGENDA_URL, "Tags": "swimmer"},
+            headers={"Title": part_title, "Click": AGENDA_URL, "Tags": "swimmer", "Priority": priority},
             timeout=30,
         ).raise_for_status()
         print(f"Melding verstuurd: {part_title} ({len(part.encode())} bytes)")
@@ -140,7 +143,7 @@ def describe(item):
 
 def notify(items):
     lines = [f"  • {describe(i)}" for i in items]
-    send(f"{len(items)} nieuwe opdracht(en) in Poolmanager", "\n".join(lines))
+    send(f"{len(items)} nieuwe opdracht(en) in Poolmanager", "\n".join(lines), priority="max")
 
 
 def count_runs(since):
