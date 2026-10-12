@@ -25,7 +25,11 @@ SEEN_FILE = "seen.json"
 SUMMARY_FILE = "last_summary.txt"  # moment van het laatst verstuurde overzicht
 TZ = ZoneInfo("Europe/Amsterdam")
 SUMMARY_HOURS = (12, 18)  # tijden van het dagelijkse overzicht
-MAX_BYTES = 3500  # ntfy.sh maakt van berichten boven 4096 bytes een bijlage
+# Maximale grootte van één pushbericht. ntfy noemt 4096 bytes, maar de pushdiensten van
+# Google/Apple tellen titel en extra gegevens mee; een bericht van 3,7 KB kwam al niet aan.
+# Daarom ruim eronder. Langere berichten worden in delen verstuurd (1/2, 2/2).
+MAX_BYTES = 2000
+MAX_PARTS = 5  # nooit meer dan 5 berichten tegelijk
 MONTH_ABBR = {"januari": "jan", "februari": "feb", "maart": "mrt", "april": "apr", "mei": "mei", "juni": "jun",
               "juli": "jul", "augustus": "aug", "september": "sep", "oktober": "okt", "november": "nov", "december": "dec"}
 
@@ -93,38 +97,50 @@ def fetch_items(session):
     return all_items
 
 
+def split(body):
+    """Verdeel een bericht in delen van max. MAX_BYTES, zonder regels te breken."""
+    parts, cur = [], []
+    for line in body.split("\n"):
+        line = line.encode()[:MAX_BYTES].decode(errors="ignore")  # extreem lange regel afkappen
+        if cur and len("\n".join(cur + [line]).encode()) > MAX_BYTES:
+            parts.append(cur)
+            cur = []
+        cur.append(line)
+    parts.append(cur)
+    if len(parts) > MAX_PARTS:
+        parts, more = parts[:MAX_PARTS], "… en meer, zie Poolmanager"
+        while len("\n".join(parts[-1] + [more]).encode()) > MAX_BYTES:
+            parts[-1].pop()
+        parts[-1].append(more)
+    return ["\n".join(p) for p in parts]
+
+
 def send(title, body):
+    """Alle meldingen gaan via deze functie, zodat de groottegrens altijd geldt."""
     topic = os.environ.get("NTFY_TOPIC")
-    if not topic:
-        print(f"Geen NTFY_TOPIC ingesteld, niet verstuurd: {title}\n{body}")
-        return
-    requests.post(
-        f"https://ntfy.sh/{topic}",
-        data=body.encode("utf-8"),
-        headers={"Title": title, "Click": AGENDA_URL, "Tags": "swimmer"},
-        timeout=30,
-    ).raise_for_status()
-    print("Melding verstuurd:", title)
+    parts = split(body)
+    for n, part in enumerate(parts, 1):
+        part_title = title if len(parts) == 1 else f"{title} ({n}/{len(parts)})"
+        assert len(part.encode()) <= MAX_BYTES
+        if not topic:
+            print(f"Geen NTFY_TOPIC ingesteld, niet verstuurd: {part_title}\n{part}")
+            continue
+        requests.post(
+            f"https://ntfy.sh/{topic}",
+            data=part.encode("utf-8"),
+            headers={"Title": part_title, "Click": AGENDA_URL, "Tags": "swimmer"},
+            timeout=30,
+        ).raise_for_status()
+        print(f"Melding verstuurd: {part_title} ({len(part.encode())} bytes)")
 
 
 def describe(item):
     return f"{item['datum']} {item['tijd']} {item['titel']} ({item['info']})"
 
 
-def clip(lines):
-    """Kort het bericht in tot onder MAX_BYTES, met een regel hoeveel er niet getoond zijn."""
-    out = []
-    for i, line in enumerate(lines):
-        if len("\n".join(out + [line, "… en 999 meer, zie Poolmanager"]).encode()) > MAX_BYTES:
-            rest = sum(1 for x in lines[i:] if x.startswith("  •"))
-            return out + [f"… en {rest} meer, zie Poolmanager"]
-        out.append(line)
-    return out
-
-
 def notify(items):
     lines = [f"  • {describe(i)}" for i in items]
-    send(f"{len(items)} nieuwe opdracht(en) in Poolmanager", "\n".join(clip(lines)))
+    send(f"{len(items)} nieuwe opdracht(en) in Poolmanager", "\n".join(lines))
 
 
 def count_runs(since):
@@ -165,7 +181,7 @@ def summary(seen, items, forced):
     ]
     lines += ["", f"Je kunt je nu nog inschrijven op {len(items)} opdracht(en) (komende {MONTHS} maanden)" + (":" if items else ".")]
     lines += [f"  • {describe(i)}" for i in items.values()]
-    send(f"Poolmanager overzicht {now:%H:%M}", "\n".join(clip(lines)))
+    send(f"Poolmanager overzicht {now:%H:%M}", "\n".join(lines))
 
 
 def slots(now):
