@@ -25,6 +25,9 @@ SEEN_FILE = "seen.json"
 SUMMARY_FILE = "last_summary.txt"  # moment van het laatst verstuurde overzicht
 TZ = ZoneInfo("Europe/Amsterdam")
 SUMMARY_HOURS = (12, 18)  # tijden van het dagelijkse overzicht
+MAX_BYTES = 3500  # ntfy.sh maakt van berichten boven 4096 bytes een bijlage
+MONTH_ABBR = {"januari": "jan", "februari": "feb", "maart": "mrt", "april": "apr", "mei": "mei", "juni": "jun",
+              "juli": "jul", "augustus": "aug", "september": "sep", "oktober": "okt", "november": "nov", "december": "dec"}
 
 
 def form_fields(soup, form_id):
@@ -54,10 +57,11 @@ def parse_month(soup):
     items = []
     for item in soup.select("div.SelfSchedulingItem"):
         m = re.search(r"OpenNewAppointment',\s*'([^']+)'", item.get("onclick", ""))
-        if not m:
+        # Dagen van de vorige/volgende maand staan grijs in het rooster; die komen op hun eigen maandpagina.
+        if not m or item.find_parent(class_="othermonth"):
             continue
         header = item.find_previous("div", class_="day_header")
-        date = header.get_text(strip=True).split("|")[0].strip() if header else "?"
+        day = " ".join(header.get_text(strip=True).split("|")[0].split()[:2]) if header else "?"
 
         def text(cls):
             el = item.find(class_=cls)
@@ -65,10 +69,10 @@ def parse_month(soup):
 
         items.append({
             "id": m.group(1),
-            "datum": f"{date} {month}",
+            "datum": f"{day} {MONTH_ABBR.get(month.split()[0], month)}",
             "titel": text("dayitem_title"),
             "tijd": text("dayitem_timespan"),
-            "info": text("dayitem_description"),
+            "info": text("dayitem_description").removeprefix("Inplanbaar").strip(),
         })
     return month, items
 
@@ -104,12 +108,23 @@ def send(title, body):
 
 
 def describe(item):
-    return f"{item['datum']} {item['tijd']} - {item['titel']} ({item['info']})"
+    return f"{item['datum']} {item['tijd']} {item['titel']} ({item['info']})"
+
+
+def clip(lines):
+    """Kort het bericht in tot onder MAX_BYTES, met een regel hoeveel er niet getoond zijn."""
+    out = []
+    for i, line in enumerate(lines):
+        if len("\n".join(out + [line, "… en 999 meer, zie Poolmanager"]).encode()) > MAX_BYTES:
+            rest = sum(1 for x in lines[i:] if x.startswith("  •"))
+            return out + [f"… en {rest} meer, zie Poolmanager"]
+        out.append(line)
+    return out
 
 
 def notify(items):
-    lines = [describe(i) for i in items]
-    send(f"{len(items)} nieuwe opdracht(en) in Poolmanager", "\n".join(lines))
+    lines = [f"  • {describe(i)}" for i in items]
+    send(f"{len(items)} nieuwe opdracht(en) in Poolmanager", "\n".join(clip(lines)))
 
 
 def count_runs(since):
@@ -142,15 +157,15 @@ def summary(seen, items, forced):
         f"- {checks}x gecontroleerd",
         f"- {len(found)} nieuwe opdracht(en) gevonden" + (":" if found else ""),
     ]
+    if failed:
+        lines.insert(2, f"- Let op: {failed} controle(s) mislukt")
     lines += [
         f"  • {v['tekst'] or 'onbekende opdracht'}" + ("" if k in items else " (al weg)")
         for k, v in found.items()
     ]
     lines += ["", f"Je kunt je nu nog inschrijven op {len(items)} opdracht(en) (komende {MONTHS} maanden)" + (":" if items else ".")]
     lines += [f"  • {describe(i)}" for i in items.values()]
-    if failed:
-        lines.append(f"Let op: {failed} controle(s) mislukt")
-    send(f"Poolmanager overzicht {now:%H:%M}", "\n".join(lines))
+    send(f"Poolmanager overzicht {now:%H:%M}", "\n".join(clip(lines)))
 
 
 def slots(now):
