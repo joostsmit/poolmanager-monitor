@@ -25,6 +25,13 @@ SEEN_FILE = "seen.json"
 SUMMARY_FILE = "last_summary.txt"  # moment van het laatst verstuurde overzicht
 TZ = ZoneInfo("Europe/Amsterdam")
 SUMMARY_HOURS = (12, 18)  # tijden van het dagelijkse overzicht
+# Maximale grootte van één pushbericht. ntfy noemt 4096 bytes, maar de pushdiensten van
+# Google/Apple tellen titel en extra gegevens mee; een bericht van 3,7 KB kwam al niet aan.
+# Daarom ruim eronder. Langere berichten worden in delen verstuurd (1/2, 2/2).
+MAX_BYTES = 2000
+MAX_PARTS = 5  # nooit meer dan 5 berichten tegelijk
+MONTH_ABBR = {"januari": "jan", "februari": "feb", "maart": "mrt", "april": "apr", "mei": "mei", "juni": "jun",
+              "juli": "jul", "augustus": "aug", "september": "sep", "oktober": "okt", "november": "nov", "december": "dec"}
 
 
 def form_fields(soup, form_id):
@@ -54,10 +61,11 @@ def parse_month(soup):
     items = []
     for item in soup.select("div.SelfSchedulingItem"):
         m = re.search(r"OpenNewAppointment',\s*'([^']+)'", item.get("onclick", ""))
-        if not m:
+        # Dagen van de vorige/volgende maand staan grijs in het rooster; die komen op hun eigen maandpagina.
+        if not m or item.find_parent(class_="othermonth"):
             continue
         header = item.find_previous("div", class_="day_header")
-        date = header.get_text(strip=True).split("|")[0].strip() if header else "?"
+        day = " ".join(header.get_text(strip=True).split("|")[0].split()[:2]) if header else "?"
 
         def text(cls):
             el = item.find(class_=cls)
@@ -65,10 +73,10 @@ def parse_month(soup):
 
         items.append({
             "id": m.group(1),
-            "datum": f"{date} {month}",
+            "datum": f"{day} {MONTH_ABBR.get(month.split()[0], month)}",
             "titel": text("dayitem_title"),
             "tijd": text("dayitem_timespan"),
-            "info": text("dayitem_description"),
+            "info": text("dayitem_description").removeprefix("Inplanbaar").strip(),
         })
     return month, items
 
@@ -89,26 +97,49 @@ def fetch_items(session):
     return all_items
 
 
+def split(body):
+    """Verdeel een bericht in delen van max. MAX_BYTES, zonder regels te breken."""
+    parts, cur = [], []
+    for line in body.split("\n"):
+        line = line.encode()[:MAX_BYTES].decode(errors="ignore")  # extreem lange regel afkappen
+        if cur and len("\n".join(cur + [line]).encode()) > MAX_BYTES:
+            parts.append(cur)
+            cur = []
+        cur.append(line)
+    parts.append(cur)
+    if len(parts) > MAX_PARTS:
+        parts, more = parts[:MAX_PARTS], "… en meer, zie Poolmanager"
+        while len("\n".join(parts[-1] + [more]).encode()) > MAX_BYTES:
+            parts[-1].pop()
+        parts[-1].append(more)
+    return ["\n".join(p) for p in parts]
+
+
 def send(title, body):
+    """Alle meldingen gaan via deze functie, zodat de groottegrens altijd geldt."""
     topic = os.environ.get("NTFY_TOPIC")
-    if not topic:
-        print(f"Geen NTFY_TOPIC ingesteld, niet verstuurd: {title}\n{body}")
-        return
-    requests.post(
-        f"https://ntfy.sh/{topic}",
-        data=body.encode("utf-8"),
-        headers={"Title": title, "Click": AGENDA_URL, "Tags": "swimmer"},
-        timeout=30,
-    ).raise_for_status()
-    print("Melding verstuurd:", title)
+    parts = split(body)
+    for n, part in enumerate(parts, 1):
+        part_title = title if len(parts) == 1 else f"{title} ({n}/{len(parts)})"
+        assert len(part.encode()) <= MAX_BYTES
+        if not topic:
+            print(f"Geen NTFY_TOPIC ingesteld, niet verstuurd: {part_title}\n{part}")
+            continue
+        requests.post(
+            f"https://ntfy.sh/{topic}",
+            data=part.encode("utf-8"),
+            headers={"Title": part_title, "Click": AGENDA_URL, "Tags": "swimmer"},
+            timeout=30,
+        ).raise_for_status()
+        print(f"Melding verstuurd: {part_title} ({len(part.encode())} bytes)")
 
 
 def describe(item):
-    return f"{item['datum']} {item['tijd']} - {item['titel']} ({item['info']})"
+    return f"{item['datum']} {item['tijd']} {item['titel']} ({item['info']})"
 
 
 def notify(items):
-    lines = [describe(i) for i in items]
+    lines = [f"  • {describe(i)}" for i in items]
     send(f"{len(items)} nieuwe opdracht(en) in Poolmanager", "\n".join(lines))
 
 
@@ -142,14 +173,14 @@ def summary(seen, items, forced):
         f"- {checks}x gecontroleerd",
         f"- {len(found)} nieuwe opdracht(en) gevonden" + (":" if found else ""),
     ]
+    if failed:
+        lines.insert(2, f"- Let op: {failed} controle(s) mislukt")
     lines += [
         f"  • {v['tekst'] or 'onbekende opdracht'}" + ("" if k in items else " (al weg)")
         for k, v in found.items()
     ]
     lines += ["", f"Je kunt je nu nog inschrijven op {len(items)} opdracht(en) (komende {MONTHS} maanden)" + (":" if items else ".")]
     lines += [f"  • {describe(i)}" for i in items.values()]
-    if failed:
-        lines.append(f"Let op: {failed} controle(s) mislukt")
     send(f"Poolmanager overzicht {now:%H:%M}", "\n".join(lines))
 
 
