@@ -80,6 +80,18 @@ De token kan alleen deze workflow starten, verder niets.
 4. Klik op **Test run**. Status **204** = goed. Klik daarna op **Create**.
 5. Kijk na een paar minuten in **Actions**: daar verschijnen runs met *"Manually run by joostsmit"*.
 
+## 5. Als er iets misgaat
+
+De monitor waarschuwt je zelf als hij zijn werk niet kan doen:
+
+- **"Poolmanager monitor werkt NIET"** (pushmelding): inloggen mislukt, de website is veranderd, of een andere fout.
+  Je krijgt de melding bij de eerste fout en daarna elk uur zolang het misgaat. In het bericht staat de oorzaak.
+- **"Poolmanager monitor werkt weer"**: alles is hersteld.
+- **In het overzicht van 12:00/18:00**: *"minder controles dan verwacht"* betekent dat cron-job.org de monitor niet (vaak genoeg) start. Kijk dan bij cron-job.org of de token verlopen is.
+- **Geen overzicht om 12:00 of 18:00 gekregen?** Dan draait de monitor helemaal niet. Kijk in GitHub bij **Actions** en bij cron-job.org.
+
+Extra vangnet: zet bij cron-job.org in je taak (tabblad **Notifications**) aan dat je een e-mail krijgt als de taak mislukt. Dat gebeurt bijvoorbeeld als de GitHub-token verlopen is.
+
 ## Lokaal draaien
 
 ```bash
