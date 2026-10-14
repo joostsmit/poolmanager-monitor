@@ -1,286 +1,428 @@
 {
  "73801": {
   "gevonden": "",
-  "tekst": "wo 14 okt 13:00-17:00 Politieacademie Eindhoven (Licht Fysiek)"
+  "tekst": "wo 14 okt 13:00-17:00 Politieacademie Eindhoven (Licht Fysiek)",
+  "open": false,
+  "geopend": ""
  },
  "75117": {
   "gevonden": "",
-  "tekst": "do 22 okt 13:00-17:00 OBT Noord Nederland (Zwaar Fysiek)"
+  "tekst": "do 22 okt 13:00-17:00 OBT Noord Nederland (Zwaar Fysiek)",
+  "open": true,
+  "geopend": ""
  },
  "74463": {
   "gevonden": "2026-10-08T23:30:22+00:00",
-  "tekst": "wo 14 okt 15:00-21:00 OBT Noord Nederland (Zwaar Fysiek)"
+  "tekst": "wo 14 okt 15:00-21:00 OBT Noord Nederland (Zwaar Fysiek)",
+  "open": false,
+  "geopend": "2026-10-08T23:30:22+00:00"
  },
  "72627": {
   "gevonden": "2026-10-09T08:15:23+00:00",
-  "tekst": "wo 14 oktober 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Regulier)"
+  "tekst": "wo 14 oktober 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Regulier)",
+  "open": false,
+  "geopend": "2026-10-09T08:15:23+00:00"
  },
  "75882": {
   "gevonden": "2026-10-09T12:20:22+00:00",
-  "tekst": "wo 14 okt 12:00-16:00 OBT Landelijke Eenheid (Zwaar Fysiek)"
+  "tekst": "wo 14 okt 12:00-16:00 OBT Landelijke Eenheid (Zwaar Fysiek)",
+  "open": false,
+  "geopend": "2026-10-09T12:20:22+00:00"
  },
  "75334": {
   "gevonden": "2026-10-09T12:45:26+00:00",
-  "tekst": "do 19 november 2026 12:30-16:00 - OBT Zeeland West Brabant (Inplanbaar Zwaar Fysiek)"
+  "tekst": "do 19 november 2026 12:30-16:00 - OBT Zeeland West Brabant (Inplanbaar Zwaar Fysiek)",
+  "open": false,
+  "geopend": "2026-10-09T12:45:26+00:00"
  },
  "75884": {
   "gevonden": "2026-10-09T13:30:38+00:00",
-  "tekst": "wo 18 november 2026 12:00-15:30 - OBT Oost Nederland (Inplanbaar Zwaar Fysiek)"
+  "tekst": "wo 18 november 2026 12:00-15:30 - OBT Oost Nederland (Inplanbaar Zwaar Fysiek)",
+  "open": false,
+  "geopend": "2026-10-09T13:30:38+00:00"
  },
  "75885": {
   "gevonden": "2026-10-09T13:35:18+00:00",
-  "tekst": "do 19 november 2026 12:00-15:30 - OBT Oost Nederland (Inplanbaar Zwaar Fysiek)"
+  "tekst": "do 19 november 2026 12:00-15:30 - OBT Oost Nederland (Inplanbaar Zwaar Fysiek)",
+  "open": false,
+  "geopend": "2026-10-09T13:35:18+00:00"
  },
  "75886": {
   "gevonden": "2026-10-09T13:35:18+00:00",
-  "tekst": "wo 02 december 2026 12:00-15:30 - OBT Oost Nederland (Inplanbaar Zwaar Fysiek)"
+  "tekst": "wo 02 december 2026 12:00-15:30 - OBT Oost Nederland (Inplanbaar Zwaar Fysiek)",
+  "open": false,
+  "geopend": "2026-10-09T13:35:18+00:00"
  },
  "75887": {
   "gevonden": "2026-10-09T13:35:18+00:00",
-  "tekst": "di 08 december 2026 12:00-15:30 - OBT Oost Nederland (Inplanbaar Zwaar Fysiek)"
+  "tekst": "di 08 december 2026 12:00-15:30 - OBT Oost Nederland (Inplanbaar Zwaar Fysiek)",
+  "open": false,
+  "geopend": "2026-10-09T13:35:18+00:00"
  },
  "75888": {
   "gevonden": "2026-10-09T13:35:18+00:00",
-  "tekst": "wo 16 december 2026 12:00-15:30 - OBT Oost Nederland (Inplanbaar Zwaar Fysiek)"
+  "tekst": "wo 16 december 2026 12:00-15:30 - OBT Oost Nederland (Inplanbaar Zwaar Fysiek)",
+  "open": false,
+  "geopend": "2026-10-09T13:35:18+00:00"
  },
  "75896": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "ma 02 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier Engels)"
+  "tekst": "ma 02 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier Engels)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75897": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "di 03 nov 08:30-12:30 Politieacademie Leusden (Regulier Engels)"
+  "tekst": "di 03 nov 08:30-12:30 Politieacademie Leusden (Regulier Engels)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75898": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "wo 04 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier Engels)"
+  "tekst": "wo 04 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier Engels)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75899": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "ma 09 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier Engels)"
+  "tekst": "ma 09 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier Engels)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75900": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "di 10 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier Engels)"
+  "tekst": "di 10 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier Engels)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75907": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "ma 16 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier)"
+  "tekst": "ma 16 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75904": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "ma 16 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)"
+  "tekst": "ma 16 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75905": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "ma 16 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)"
+  "tekst": "ma 16 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75903": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "ma 16 nov 08:30-12:30 Politieacademie Leusden (Regulier Engels)"
+  "tekst": "ma 16 nov 08:30-12:30 Politieacademie Leusden (Regulier Engels)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75908": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "ma 16 november 2026 08:30-15:30 - Politieacademie Leusden (Inplanbaar Regulier)"
+  "tekst": "ma 16 november 2026 08:30-15:30 - Politieacademie Leusden (Inplanbaar Regulier)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75906": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "ma 16 november 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)"
+  "tekst": "ma 16 november 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75910": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "di 17 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier)"
+  "tekst": "di 17 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75909": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "di 17 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier Engels)"
+  "tekst": "di 17 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier Engels)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75913": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "wo 18 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier)"
+  "tekst": "wo 18 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75912": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "wo 18 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier)"
+  "tekst": "wo 18 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75915": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "do 19 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)"
+  "tekst": "do 19 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75924": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "ma 23 november 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)"
+  "tekst": "ma 23 november 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75923": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "ma 23 november 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)"
+  "tekst": "ma 23 november 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75928": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "do 26 november 2026 08:30-15:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)"
+  "tekst": "do 26 november 2026 08:30-15:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75930": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "vr 27 november 2026 08:30-15:30 - Politieacademie Leusden (Inplanbaar Regulier)"
+  "tekst": "vr 27 november 2026 08:30-15:30 - Politieacademie Leusden (Inplanbaar Regulier)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75931": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "vr 27 november 2026 08:30-15:30 - Politieacademie Leusden (Inplanbaar Regulier)"
+  "tekst": "vr 27 november 2026 08:30-15:30 - Politieacademie Leusden (Inplanbaar Regulier)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75932": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "vr 27 november 2026 10:30-15:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)"
+  "tekst": "vr 27 november 2026 10:30-15:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75933": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "ma 30 december 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier)"
+  "tekst": "ma 30 december 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75936": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "ma 30 december 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)"
+  "tekst": "ma 30 december 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75935": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "ma 30 december 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)"
+  "tekst": "ma 30 december 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75937": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "di 01 dec december 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier)"
+  "tekst": "di 01 dec december 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75942": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "do 03 december 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)"
+  "tekst": "do 03 december 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75944": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "ma 07 december 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)"
+  "tekst": "ma 07 december 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75945": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "ma 07 december 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)"
+  "tekst": "ma 07 december 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75946": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "wo 09 december 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)"
+  "tekst": "wo 09 december 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75948": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "do 10 december 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier)"
+  "tekst": "do 10 december 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75947": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "do 10 december 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Zwaar Fysiek)"
+  "tekst": "do 10 december 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Zwaar Fysiek)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75949": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "do 10 december 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Zwaar Fysiek)"
+  "tekst": "do 10 december 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Zwaar Fysiek)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75950": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "vr 11 december 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier)"
+  "tekst": "vr 11 december 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75952": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "vr 11 december 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Zwaar Fysiek)"
+  "tekst": "vr 11 december 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Zwaar Fysiek)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75953": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "ma 14 december 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier Engels)"
+  "tekst": "ma 14 december 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier Engels)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75954": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "ma 14 december 2026 09:00-15:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)"
+  "tekst": "ma 14 december 2026 09:00-15:30 - Politieacademie Leusden (Inplanbaar Licht Fysiek)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75956": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "ma 14 december 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Regulier Engels)"
+  "tekst": "ma 14 december 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Regulier Engels)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75955": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "ma 14 december 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Regulier)"
+  "tekst": "ma 14 december 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Regulier)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75959": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "wo 16 december 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Regulier)"
+  "tekst": "wo 16 december 2026 13:30-17:30 - Politieacademie Leusden (Inplanbaar Regulier)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75960": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "do 17 december 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier Engels)"
+  "tekst": "do 17 december 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier Engels)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75961": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "vr 18 december 2026 08:30-11:30 - Politieacademie Leusden (Inplanbaar Regulier Engels)"
+  "tekst": "vr 18 december 2026 08:30-11:30 - Politieacademie Leusden (Inplanbaar Regulier Engels)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "75965": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "ma 21 december 2026 08:30-15:30 - Politieacademie Leusden (Inplanbaar Regulier)"
+  "tekst": "ma 21 december 2026 08:30-15:30 - Politieacademie Leusden (Inplanbaar Regulier)",
+  "open": false,
+  "geopend": "2026-10-12T10:10:25+00:00"
  },
  "76016": {
   "gevonden": "2026-10-12T10:20:21+00:00",
-  "tekst": "do 15 okt 10:30-15:30 Politieacademie Leusden (Regulier)"
+  "tekst": "do 15 okt 10:30-15:30 Politieacademie Leusden (Regulier)",
+  "open": false,
+  "geopend": "2026-10-12T10:20:21+00:00"
  },
  "73986": {
   "gevonden": "2026-10-12T10:35:19+00:00",
-  "tekst": "wo 14 okt 13:00-20:00 Politieacademie Leusden (Gespecialiseerd BPO)"
+  "tekst": "wo 14 okt 13:00-20:00 Politieacademie Leusden (Gespecialiseerd BPO)",
+  "open": false,
+  "geopend": "2026-10-12T10:35:19+00:00"
  },
  "73899": {
   "gevonden": "2026-10-12T10:40:24+00:00",
-  "tekst": "vr 16 okt 13:30-17:30 Politieacademie Leusden (Regulier)"
+  "tekst": "vr 16 okt 13:30-17:30 Politieacademie Leusden (Regulier)",
+  "open": false,
+  "geopend": "2026-10-12T10:40:24+00:00"
  },
  "72631": {
   "gevonden": "2026-10-12T13:55:25+00:00",
-  "tekst": "vr 16 okt 13:30-15:30 Politieacademie Leusden (Regulier)"
+  "tekst": "vr 16 okt 13:30-15:30 Politieacademie Leusden (Regulier)",
+  "open": false,
+  "geopend": "2026-10-12T13:55:25+00:00"
  },
  "71741": {
   "gevonden": "2026-10-12T14:20:30+00:00",
-  "tekst": "di 10 nov 12:00-16:30 PA Ossendrecht Conflict en Crisis b (Licht Fysiek)"
+  "tekst": "di 10 nov 12:00-16:30 PA Ossendrecht Conflict en Crisis b (Licht Fysiek)",
+  "open": false,
+  "geopend": "2026-10-12T14:20:30+00:00"
  },
  "76082": {
   "gevonden": "2026-10-12T15:25:24+00:00",
-  "tekst": "do 15 okt 13:00-17:00 Politieacademie Eindhoven (Regulier)"
+  "tekst": "do 15 okt 13:00-17:00 Politieacademie Eindhoven (Regulier)",
+  "open": false,
+  "geopend": "2026-10-12T15:25:24+00:00"
  },
  "72290": {
   "gevonden": "2026-10-13T05:25:16+00:00",
-  "tekst": "di 20 okt 08:00-12:00 Politieacademie Rotterdam (Gespecialiseerd BPO)"
+  "tekst": "di 20 okt 08:00-12:00 Politieacademie Rotterdam (Gespecialiseerd BPO)",
+  "open": false,
+  "geopend": "2026-10-13T05:25:16+00:00"
  },
  "72294": {
   "gevonden": "2026-10-13T05:25:16+00:00",
-  "tekst": "di 20 okt 13:00-17:00 Politieacademie Rotterdam (Regulier)"
+  "tekst": "di 20 okt 13:00-17:00 Politieacademie Rotterdam (Regulier)",
+  "open": false,
+  "geopend": "2026-10-13T05:25:16+00:00"
  },
  "72628": {
   "gevonden": "2026-10-13T05:30:37+00:00",
-  "tekst": "do 15 okt 08:30-15:30 Politieacademie Leusden (Regulier)"
+  "tekst": "do 15 okt 08:30-15:30 Politieacademie Leusden (Regulier)",
+  "open": false,
+  "geopend": "2026-10-13T05:30:37+00:00"
  },
  "76144": {
   "gevonden": "2026-10-13T05:40:21+00:00",
-  "tekst": "do 15 okt 13:30-15:30 Politieacademie Leusden (Regulier)"
+  "tekst": "do 15 okt 13:30-15:30 Politieacademie Leusden (Regulier)",
+  "open": false,
+  "geopend": "2026-10-13T05:40:21+00:00"
  },
  "76146": {
   "gevonden": "2026-10-13T05:45:24+00:00",
-  "tekst": "vr 16 okt 08:00-17:00 Politieacademie Apeldoorn (Regulier Vrouw)"
+  "tekst": "vr 16 okt 08:00-17:00 Politieacademie Apeldoorn (Regulier Vrouw)",
+  "open": false,
+  "geopend": "2026-10-13T05:45:24+00:00"
  },
  "76156": {
   "gevonden": "2026-10-13T10:00:47+00:00",
-  "tekst": "ma 09 nov 08:30-12:30 Politieacademie Leusden (Licht Fysiek)"
+  "tekst": "ma 09 nov 08:30-12:30 Politieacademie Leusden (Licht Fysiek)",
+  "open": false,
+  "geopend": "2026-10-13T10:00:47+00:00"
  },
  "76158": {
   "gevonden": "2026-10-13T10:20:27+00:00",
-  "tekst": "wo 16 dec 08:30-11:30 Politieacademie Leusden (Regulier Engels)"
+  "tekst": "wo 16 dec 08:30-11:30 Politieacademie Leusden (Regulier Engels)",
+  "open": false,
+  "geopend": "2026-10-13T10:20:27+00:00"
  },
  "75951": {
   "gevonden": "2026-10-13T14:25:22+00:00",
-  "tekst": "vr 11 dec 09:00-17:00 Politieacademie Leusden (Licht Fysiek)"
+  "tekst": "vr 11 dec 09:00-17:00 Politieacademie Leusden (Licht Fysiek)",
+  "open": false,
+  "geopend": "2026-10-13T14:25:22+00:00"
  },
  "76162": {
   "gevonden": "2026-10-13T15:55:23+00:00",
-  "tekst": "wo 14 okt 12:00-16:00 OBT Landelijke Eenheid (Licht Fysiek)"
+  "tekst": "wo 14 okt 12:00-16:00 OBT Landelijke Eenheid (Licht Fysiek)",
+  "open": false,
+  "geopend": "2026-10-13T15:55:23+00:00"
  },
  "72625": {
   "gevonden": "2026-10-14T05:10:24+00:00",
-  "tekst": "wo 14 okt 08:30-12:30 Politieacademie Leusden (Regulier)"
+  "tekst": "wo 14 okt 08:30-12:30 Politieacademie Leusden (Regulier)",
+  "open": false,
+  "geopend": "2026-10-14T05:10:24+00:00"
  },
  "72285": {
   "gevonden": "2026-10-14T05:30:35+00:00",
-  "tekst": "vr 16 okt 08:00-12:00 Politieacademie Rotterdam (Regulier Engels)"
+  "tekst": "vr 16 okt 08:00-12:00 Politieacademie Rotterdam (Regulier Engels)",
+  "open": false,
+  "geopend": "2026-10-14T05:30:35+00:00"
  }
 }
