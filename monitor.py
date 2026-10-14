@@ -18,6 +18,7 @@ from bs4 import BeautifulSoup
 BASE = "https://cpzzp.poolmanager.mobi"
 LOGIN_URL = BASE + "/Account/Login.aspx"
 AGENDA_URL = BASE + "/uiweb/emp/EmployeeAgenda.aspx"
+APPOINTMENT_URL = BASE + "/uiweb/emp/Appointment.aspx?id={}"  # pagina van één opdracht, met knop Zelfroosteren
 NEXT_BUTTON = "ctl00$ctl00$MasterContentPlaceHolder$ContentPlaceHolder1$MonthCalendar$btnNext"
 MONTHS = int(os.environ.get("MONTHS_AHEAD", "3"))  # aantal maanden om te bekijken
 SEEN_FILE = "seen.json"
@@ -139,25 +140,30 @@ def split(body):
     return ["\n".join(p) for p in parts]
 
 
-def send(title, body, priority="default", tags="swimmer"):
+def send(title, body, priority="default", tags="swimmer", click=AGENDA_URL, buttons=()):
     """Alle meldingen gaan via deze functie, zodat de groottegrens altijd geldt.
 
-    priority: ntfy-prioriteit ("default" of "max"). "max" = hard geluid en kan door Niet storen heen.
+    priority: ntfy-prioriteit ("default", "high" of "max"). "max" = hard geluid en kan door Niet storen heen.
+    click: pagina die opent als je op de melding tikt.
+    buttons: max. 3 (tekst, url)-knoppen onder de melding; alleen bij het eerste deel.
     """
     topic = os.environ.get("NTFY_TOPIC")
     parts = split(body)
     for n, part in enumerate(parts, 1):
         part_title = title if len(parts) == 1 else f"{title} ({n}/{len(parts)})"
         assert len(part.encode()) <= MAX_BYTES
+        message = {
+            "topic": topic, "title": part_title, "message": part, "priority": {"default": 3, "high": 4, "max": 5}[priority],
+            "tags": tags.split(","), "click": click,
+            "actions": [{"action": "view", "label": label, "url": url} for label, url in buttons[:3]] if n == 1 else [],
+        }
         if not topic:
             print(f"Geen NTFY_TOPIC ingesteld, niet verstuurd: {part_title}\n{part}")
+            for a in message["actions"]:
+                print(f"  [knop] {a['label']} -> {a['url']}")
             continue
-        requests.post(
-            f"https://ntfy.sh/{topic}",
-            data=part.encode("utf-8"),
-            headers={"Title": part_title, "Click": AGENDA_URL, "Tags": tags, "Priority": priority},
-            timeout=30,
-        ).raise_for_status()
+        # Als JSON versturen: dan mogen titel en knoppen ook tekens als é bevatten.
+        requests.post("https://ntfy.sh/", json=message, timeout=30).raise_for_status()
         print(f"Melding verstuurd: {part_title} ({len(part.encode())} bytes)")
 
 
@@ -165,9 +171,16 @@ def describe(item):
     return f"{item['datum']} {item['tijd']} {item['titel']} ({item['info']})"
 
 
-def notify(items):
-    lines = [f"  • {describe(i)}" for i in items]
-    send(f"{len(items)} nieuwe opdracht(en) in Poolmanager", "\n".join(lines), priority="max")
+def notify(items, reopened):
+    """items: opdrachten die nu open zijn en dat bij de vorige controle niet waren.
+    reopened: id's daarvan die al eerder open stonden (bijv. teruggegeven door een collega)."""
+    lines = [f"  • {describe(i)}" + (" (weer open)" if i["id"] in reopened else "") for i in items]
+    title = "nieuwe opdracht(en)" if not reopened else "opdracht(en) (weer) open"
+    # Tikken op de melding opent bij één opdracht meteen die opdracht; anders de agenda.
+    # Daarnaast knoppen voor de eerste 3 opdrachten.
+    click = APPOINTMENT_URL.format(items[0]["id"]) if len(items) == 1 else AGENDA_URL
+    buttons = [(f"Open {i['datum']} {i['tijd'][:5]}", APPOINTMENT_URL.format(i["id"])) for i in items[:3]]
+    send(f"{len(items)} {title} in Poolmanager", "\n".join(lines), priority="max", click=click, buttons=buttons)
 
 
 def count_runs(since):
@@ -192,7 +205,7 @@ def summary(seen, items, forced):
     now = datetime.now(TZ)
     current = current_slot(now)
     since = current if forced else max(t for t in slots(now) if t < current)
-    found = {k: v for k, v in seen.items() if v["gevonden"] and datetime.fromisoformat(v["gevonden"]) >= since}
+    found = {k: v for k, v in seen.items() if v.get("geopend") and datetime.fromisoformat(v["geopend"]) >= since}
     ok, failed = count_runs(since)
     checks = "?" if ok is None else ok + 1  # +1 voor deze run
     lines = [
@@ -206,7 +219,9 @@ def summary(seen, items, forced):
     if ok is not None and ok + 1 < expected // 2:
         lines.insert(2, f"- Let op: minder controles dan verwacht (~{expected}). Werkt cron-job.org nog?")
     lines += [
-        f"  • {v['tekst'] or 'onbekende opdracht'}" + ("" if k in items else " (al weg)")
+        f"  • {v['tekst'] or 'onbekende opdracht'}"
+        + (" (weer open)" if v["gevonden"] and datetime.fromisoformat(v["gevonden"]) < since else "")
+        + ("" if k in items else " (al weg)")
         for k, v in found.items()
     ]
     lines += ["", f"Je kunt je nu nog inschrijven op {len(items)} opdracht(en) (komende {MONTHS} maanden)" + (":" if items else ".")]
@@ -297,19 +312,31 @@ def check():
     if isinstance(seen, list):  # oud formaat: alleen id's
         seen = {k: "" for k in seen}
     seen = {k: v if isinstance(v, dict) else {"gevonden": v, "tekst": ""} for k, v in seen.items()}
-    new = [i for k, i in items.items() if k not in seen]
+    for k, v in seen.items():
+        if "open" not in v:  # ouder formaat: open-status nog onbekend, nu vastleggen zonder melding
+            v["open"] = k in items
+            v.setdefault("geopend", v["gevonden"])
+    # Melden wat nu open is en bij de vorige controle niet: nieuw, of weer open (bijv. teruggegeven).
+    newly_open = [i for k, i in items.items() if k not in seen or not seen[k]["open"]]
+    reopened = {i["id"] for i in newly_open if i["id"] in seen}
 
     if first_run:
         print(f"Eerste keer: {len(items)} opdracht(en) opgeslagen, geen melding.")
-    elif new:
-        notify(new)
+    elif newly_open:
+        notify(newly_open, reopened)
     else:
         print("Geen nieuwe opdrachten.")
 
-    # Bewaar alles wat ooit gezien is, met het moment van vinden en een omschrijving (laatste 1000).
+    # Bewaar alles wat ooit gezien is: wanneer gevonden, wanneer (weer) open, omschrijving en of hij nu open is.
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    for k, v in seen.items():
+        v["open"] = k in items
+    for i in newly_open:
+        entry = seen.setdefault(i["id"], {"gevonden": "" if first_run else now})
+        entry["geopend"] = entry["gevonden"] if first_run else now
+        entry["open"] = True
     for k, item in items.items():
-        seen.setdefault(k, {"gevonden": "" if first_run else now})["tekst"] = describe(item)
+        seen[k]["tekst"] = describe(item)
     seen = dict(list(seen.items())[-1000:])
     with open(SEEN_FILE, "w") as f:
         json.dump(seen, f, indent=1)
