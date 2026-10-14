@@ -2,7 +2,7 @@
 
 Kijkt elke 5 minuten (gestart via cron-job.org, zie stap 4) in je Poolmanager-kalender en stuurt een pushmelding naar je telefoon als er een **nieuwe open opdracht** bij komt.
 
-- **Gele** items (open opdrachten) → hierover krijg je een melding.
+- **Gele** items (open opdrachten) → hierover krijg je een melding. Ook als een opdracht die al weg was **weer open** komt (bijv. teruggegeven door een collega).
 - **Groene** items (al ingeschreven) en grijze items (je beschikbaarheid) → worden genegeerd.
 - Er wordt 3 maanden vooruit gekeken.
 - Om **12:00 en 18:00** krijg je een overzicht: hoe vaak er sinds het vorige overzicht is gecontroleerd, hoeveel nieuwe opdrachten er zijn gevonden en hoeveel er nu open staan.

@@ -165,9 +165,12 @@ def describe(item):
     return f"{item['datum']} {item['tijd']} {item['titel']} ({item['info']})"
 
 
-def notify(items):
-    lines = [f"  • {describe(i)}" for i in items]
-    send(f"{len(items)} nieuwe opdracht(en) in Poolmanager", "\n".join(lines), priority="max")
+def notify(items, reopened):
+    """items: opdrachten die nu open zijn en dat bij de vorige controle niet waren.
+    reopened: id's daarvan die al eerder open stonden (bijv. teruggegeven door een collega)."""
+    lines = [f"  • {describe(i)}" + (" (weer open)" if i["id"] in reopened else "") for i in items]
+    title = "nieuwe opdracht(en)" if not reopened else "opdracht(en) (weer) open"
+    send(f"{len(items)} {title} in Poolmanager", "\n".join(lines), priority="max")
 
 
 def count_runs(since):
@@ -192,7 +195,7 @@ def summary(seen, items, forced):
     now = datetime.now(TZ)
     current = current_slot(now)
     since = current if forced else max(t for t in slots(now) if t < current)
-    found = {k: v for k, v in seen.items() if v["gevonden"] and datetime.fromisoformat(v["gevonden"]) >= since}
+    found = {k: v for k, v in seen.items() if v.get("geopend") and datetime.fromisoformat(v["geopend"]) >= since}
     ok, failed = count_runs(since)
     checks = "?" if ok is None else ok + 1  # +1 voor deze run
     lines = [
@@ -206,7 +209,9 @@ def summary(seen, items, forced):
     if ok is not None and ok + 1 < expected // 2:
         lines.insert(2, f"- Let op: minder controles dan verwacht (~{expected}). Werkt cron-job.org nog?")
     lines += [
-        f"  • {v['tekst'] or 'onbekende opdracht'}" + ("" if k in items else " (al weg)")
+        f"  • {v['tekst'] or 'onbekende opdracht'}"
+        + (" (weer open)" if v["gevonden"] and datetime.fromisoformat(v["gevonden"]) < since else "")
+        + ("" if k in items else " (al weg)")
         for k, v in found.items()
     ]
     lines += ["", f"Je kunt je nu nog inschrijven op {len(items)} opdracht(en) (komende {MONTHS} maanden)" + (":" if items else ".")]
@@ -297,19 +302,31 @@ def check():
     if isinstance(seen, list):  # oud formaat: alleen id's
         seen = {k: "" for k in seen}
     seen = {k: v if isinstance(v, dict) else {"gevonden": v, "tekst": ""} for k, v in seen.items()}
-    new = [i for k, i in items.items() if k not in seen]
+    for k, v in seen.items():
+        if "open" not in v:  # ouder formaat: open-status nog onbekend, nu vastleggen zonder melding
+            v["open"] = k in items
+            v.setdefault("geopend", v["gevonden"])
+    # Melden wat nu open is en bij de vorige controle niet: nieuw, of weer open (bijv. teruggegeven).
+    newly_open = [i for k, i in items.items() if k not in seen or not seen[k]["open"]]
+    reopened = {i["id"] for i in newly_open if i["id"] in seen}
 
     if first_run:
         print(f"Eerste keer: {len(items)} opdracht(en) opgeslagen, geen melding.")
-    elif new:
-        notify(new)
+    elif newly_open:
+        notify(newly_open, reopened)
     else:
         print("Geen nieuwe opdrachten.")
 
-    # Bewaar alles wat ooit gezien is, met het moment van vinden en een omschrijving (laatste 1000).
+    # Bewaar alles wat ooit gezien is: wanneer gevonden, wanneer (weer) open, omschrijving en of hij nu open is.
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    for k, v in seen.items():
+        v["open"] = k in items
+    for i in newly_open:
+        entry = seen.setdefault(i["id"], {"gevonden": "" if first_run else now})
+        entry["geopend"] = entry["gevonden"] if first_run else now
+        entry["open"] = True
     for k, item in items.items():
-        seen.setdefault(k, {"gevonden": "" if first_run else now})["tekst"] = describe(item)
+        seen[k]["tekst"] = describe(item)
     seen = dict(list(seen.items())[-1000:])
     with open(SEEN_FILE, "w") as f:
         json.dump(seen, f, indent=1)
