@@ -18,6 +18,7 @@ from bs4 import BeautifulSoup
 BASE = "https://cpzzp.poolmanager.mobi"
 LOGIN_URL = BASE + "/Account/Login.aspx"
 AGENDA_URL = BASE + "/uiweb/emp/EmployeeAgenda.aspx"
+APPOINTMENT_URL = BASE + "/uiweb/emp/Appointment.aspx?id={}"  # pagina van één opdracht, met knop Zelfroosteren
 NEXT_BUTTON = "ctl00$ctl00$MasterContentPlaceHolder$ContentPlaceHolder1$MonthCalendar$btnNext"
 MONTHS = int(os.environ.get("MONTHS_AHEAD", "3"))  # aantal maanden om te bekijken
 SEEN_FILE = "seen.json"
@@ -139,25 +140,30 @@ def split(body):
     return ["\n".join(p) for p in parts]
 
 
-def send(title, body, priority="default", tags="swimmer"):
+def send(title, body, priority="default", tags="swimmer", click=AGENDA_URL, buttons=()):
     """Alle meldingen gaan via deze functie, zodat de groottegrens altijd geldt.
 
-    priority: ntfy-prioriteit ("default" of "max"). "max" = hard geluid en kan door Niet storen heen.
+    priority: ntfy-prioriteit ("default", "high" of "max"). "max" = hard geluid en kan door Niet storen heen.
+    click: pagina die opent als je op de melding tikt.
+    buttons: max. 3 (tekst, url)-knoppen onder de melding; alleen bij het eerste deel.
     """
     topic = os.environ.get("NTFY_TOPIC")
     parts = split(body)
     for n, part in enumerate(parts, 1):
         part_title = title if len(parts) == 1 else f"{title} ({n}/{len(parts)})"
         assert len(part.encode()) <= MAX_BYTES
+        message = {
+            "topic": topic, "title": part_title, "message": part, "priority": {"default": 3, "high": 4, "max": 5}[priority],
+            "tags": tags.split(","), "click": click,
+            "actions": [{"action": "view", "label": label, "url": url} for label, url in buttons[:3]] if n == 1 else [],
+        }
         if not topic:
             print(f"Geen NTFY_TOPIC ingesteld, niet verstuurd: {part_title}\n{part}")
+            for a in message["actions"]:
+                print(f"  [knop] {a['label']} -> {a['url']}")
             continue
-        requests.post(
-            f"https://ntfy.sh/{topic}",
-            data=part.encode("utf-8"),
-            headers={"Title": part_title, "Click": AGENDA_URL, "Tags": tags, "Priority": priority},
-            timeout=30,
-        ).raise_for_status()
+        # Als JSON versturen: dan mogen titel en knoppen ook tekens als é bevatten.
+        requests.post("https://ntfy.sh/", json=message, timeout=30).raise_for_status()
         print(f"Melding verstuurd: {part_title} ({len(part.encode())} bytes)")
 
 
@@ -170,7 +176,11 @@ def notify(items, reopened):
     reopened: id's daarvan die al eerder open stonden (bijv. teruggegeven door een collega)."""
     lines = [f"  • {describe(i)}" + (" (weer open)" if i["id"] in reopened else "") for i in items]
     title = "nieuwe opdracht(en)" if not reopened else "opdracht(en) (weer) open"
-    send(f"{len(items)} {title} in Poolmanager", "\n".join(lines), priority="max")
+    # Tikken op de melding opent bij één opdracht meteen die opdracht; anders de agenda.
+    # Daarnaast knoppen voor de eerste 3 opdrachten.
+    click = APPOINTMENT_URL.format(items[0]["id"]) if len(items) == 1 else AGENDA_URL
+    buttons = [(f"Open {i['datum']} {i['tijd'][:5]}", APPOINTMENT_URL.format(i["id"])) for i in items[:3]]
+    send(f"{len(items)} {title} in Poolmanager", "\n".join(lines), priority="max", click=click, buttons=buttons)
 
 
 def count_runs(since):
