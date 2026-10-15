@@ -8,8 +8,8 @@
  "75117": {
   "gevonden": "",
   "tekst": "do 22 okt 13:00-17:00 OBT Noord Nederland (Zwaar Fysiek)",
-  "open": false,
-  "geopend": "2026-10-14T13:45:25+00:00"
+  "open": true,
+  "geopend": "2026-10-15T12:20:34+00:00"
  },
  "74463": {
   "gevonden": "2026-10-08T23:30:22+00:00",
@@ -427,8 +427,86 @@
  },
  "71385": {
   "gevonden": "2026-10-15T09:40:28+00:00",
-  "geopend": "2026-10-15T09:40:28+00:00",
-  "open": false,
+  "geopend": "2026-10-15T12:20:34+00:00",
+  "open": true,
   "tekst": "do 19 nov 12:30-16:00 OBT Oost Nederland (Zwaar Fysiek)"
+ },
+ "76176": {
+  "gevonden": "2026-10-15T12:20:34+00:00",
+  "geopend": "2026-10-15T12:20:34+00:00",
+  "open": true,
+  "tekst": "di 03 nov 08:00-12:00 Politieacademie Den Haag (Regulier Engels)"
+ },
+ "76177": {
+  "gevonden": "2026-10-15T12:20:34+00:00",
+  "geopend": "2026-10-15T12:20:34+00:00",
+  "open": true,
+  "tekst": "di 03 nov 12:30-16:30 Politieacademie Den Haag (Regulier Engels)"
+ },
+ "76178": {
+  "gevonden": "2026-10-15T12:20:34+00:00",
+  "geopend": "2026-10-15T12:20:34+00:00",
+  "open": true,
+  "tekst": "wo 04 nov 08:00-12:00 Politieacademie Den Haag (Regulier Engels)"
+ },
+ "76179": {
+  "gevonden": "2026-10-15T12:20:34+00:00",
+  "geopend": "2026-10-15T12:20:34+00:00",
+  "open": true,
+  "tekst": "wo 04 nov 12:30-16:30 Politieacademie Den Haag (Regulier Engels)"
+ },
+ "76180": {
+  "gevonden": "2026-10-15T12:20:34+00:00",
+  "geopend": "2026-10-15T12:20:34+00:00",
+  "open": true,
+  "tekst": "ma 16 nov 08:00-14:30 Politieacademie Den Haag (Regulier)"
+ },
+ "76182": {
+  "gevonden": "2026-10-15T12:20:34+00:00",
+  "geopend": "2026-10-15T12:20:34+00:00",
+  "open": true,
+  "tekst": "wo 18 nov 08:00-14:30 Politieacademie Den Haag (Regulier)"
+ },
+ "76191": {
+  "gevonden": "2026-10-15T12:20:34+00:00",
+  "geopend": "2026-10-15T12:20:34+00:00",
+  "open": true,
+  "tekst": "di 24 nov 08:00-12:00 Politieacademie Den Haag (Licht Fysiek)"
+ },
+ "76196": {
+  "gevonden": "2026-10-15T12:20:34+00:00",
+  "geopend": "2026-10-15T12:20:34+00:00",
+  "open": true,
+  "tekst": "wo 25 nov 12:30-16:30 Politieacademie Den Haag (Licht Fysiek)"
+ },
+ "76204": {
+  "gevonden": "2026-10-15T12:20:34+00:00",
+  "geopend": "2026-10-15T12:20:34+00:00",
+  "open": true,
+  "tekst": "di 01 dec 08:00-12:00 Politieacademie Den Haag (Regulier)"
+ },
+ "76205": {
+  "gevonden": "2026-10-15T12:20:34+00:00",
+  "geopend": "2026-10-15T12:20:34+00:00",
+  "open": true,
+  "tekst": "di 01 dec 12:30-16:30 Politieacademie Den Haag (Regulier)"
+ },
+ "76210": {
+  "gevonden": "2026-10-15T12:20:34+00:00",
+  "geopend": "2026-10-15T12:20:34+00:00",
+  "open": true,
+  "tekst": "ma 07 dec 12:30-16:30 Politieacademie Den Haag (Zwaar Fysiek)"
+ },
+ "76215": {
+  "gevonden": "2026-10-15T12:20:34+00:00",
+  "geopend": "2026-10-15T12:20:34+00:00",
+  "open": true,
+  "tekst": "vr 11 dec 08:00-12:00 Politieacademie Den Haag (Regulier Engels)"
+ },
+ "76224": {
+  "gevonden": "2026-10-15T12:20:34+00:00",
+  "geopend": "2026-10-15T12:20:34+00:00",
+  "open": true,
+  "tekst": "wo 23 dec 12:30-16:30 Politieacademie Den Haag (Gespecialiseerd BPO)"
  }
 }
