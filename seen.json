@@ -8,7 +8,7 @@
  "75117": {
   "gevonden": "",
   "tekst": "do 22 okt 13:00-17:00 OBT Noord Nederland (Zwaar Fysiek)",
-  "open": true,
+  "open": false,
   "geopend": "2026-10-14T13:45:25+00:00"
  },
  "74463": {
@@ -428,7 +428,7 @@
  "71385": {
   "gevonden": "2026-10-15T09:40:28+00:00",
   "geopend": "2026-10-15T09:40:28+00:00",
-  "open": true,
+  "open": false,
   "tekst": "do 19 nov 12:30-16:00 OBT Oost Nederland (Zwaar Fysiek)"
  }
 }
