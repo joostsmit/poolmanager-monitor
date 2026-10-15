@@ -508,5 +508,11 @@
   "geopend": "2026-10-15T12:20:34+00:00",
   "open": false,
   "tekst": "wo 23 dec 12:30-16:30 Politieacademie Den Haag (Gespecialiseerd BPO)"
+ },
+ "76272": {
+  "gevonden": "2026-10-15T16:00:49+00:00",
+  "geopend": "2026-10-15T16:00:49+00:00",
+  "open": true,
+  "tekst": "di 20 okt 10:00-14:00 Politieacademie Amsterdam (Licht Fysiek)"
  }
 }
