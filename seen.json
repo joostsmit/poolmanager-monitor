@@ -520,5 +520,11 @@
   "geopend": "2026-10-16T11:10:24+00:00",
   "open": false,
   "tekst": "do 12 nov 13:00-16:00 OBT Oost Nederland (Zwaar Fysiek)"
+ },
+ "75077": {
+  "gevonden": "2026-10-19T05:15:33+00:00",
+  "geopend": "2026-10-19T05:15:33+00:00",
+  "open": true,
+  "tekst": "di 20 okt 13:00-17:00 Politieacademie Amsterdam (Zwaar Fysiek)"
  }
 }
