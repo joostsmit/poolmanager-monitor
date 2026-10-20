@@ -590,7 +590,7 @@
  "76381": {
   "gevonden": "2026-10-20T13:50:25+00:00",
   "geopend": "2026-10-20T13:50:25+00:00",
-  "open": true,
+  "open": false,
   "tekst": "di 01 dec 08:00-12:00 Politieacademie Rotterdam (Regulier)"
  },
  "76383": {
@@ -602,7 +602,7 @@
  "76384": {
   "gevonden": "2026-10-20T13:50:25+00:00",
   "geopend": "2026-10-20T13:50:25+00:00",
-  "open": true,
+  "open": false,
   "tekst": "wo 02 dec 08:00-12:00 Politieacademie Rotterdam (Regulier)"
  },
  "76388": {
@@ -638,7 +638,7 @@
  "76393": {
   "gevonden": "2026-10-20T13:50:25+00:00",
   "geopend": "2026-10-20T13:50:25+00:00",
-  "open": true,
+  "open": false,
   "tekst": "vr 04 dec 13:00-17:00 Politieacademie Rotterdam (Regulier)"
  },
  "76395": {
@@ -656,7 +656,7 @@
  "76398": {
   "gevonden": "2026-10-20T13:50:25+00:00",
   "geopend": "2026-10-20T13:50:25+00:00",
-  "open": true,
+  "open": false,
   "tekst": "di 08 dec 18:00-22:00 Politieacademie Rotterdam (Licht Fysiek)"
  },
  "76399": {
@@ -674,7 +674,7 @@
  "76404": {
   "gevonden": "2026-10-20T13:50:25+00:00",
   "geopend": "2026-10-20T13:50:25+00:00",
-  "open": true,
+  "open": false,
   "tekst": "vr 11 dec 08:00-12:00 Politieacademie Rotterdam (Regulier Engels)"
  },
  "76403": {
@@ -686,19 +686,19 @@
  "76418": {
   "gevonden": "2026-10-20T13:50:25+00:00",
   "geopend": "2026-10-20T13:50:25+00:00",
-  "open": true,
+  "open": false,
   "tekst": "di 29 dec 08:00-12:00 Politieacademie Rotterdam (Regulier Vrouw)"
  },
  "76413": {
   "gevonden": "2026-10-20T13:50:25+00:00",
   "geopend": "2026-10-20T13:50:25+00:00",
-  "open": true,
+  "open": false,
   "tekst": "di 29 dec 08:00-12:00 Politieacademie Rotterdam (Regulier)"
  },
  "76417": {
   "gevonden": "2026-10-20T13:50:25+00:00",
   "geopend": "2026-10-20T13:50:25+00:00",
-  "open": true,
+  "open": false,
   "tekst": "di 29 dec 08:00-12:00 Politieacademie Rotterdam (Regulier)"
  },
  "76421": {
@@ -710,13 +710,13 @@
  "76420": {
   "gevonden": "2026-10-20T13:50:25+00:00",
   "geopend": "2026-10-20T13:50:25+00:00",
-  "open": true,
+  "open": false,
   "tekst": "di 29 dec 13:00-17:00 Politieacademie Rotterdam (Regulier Vrouw)"
  },
  "76419": {
   "gevonden": "2026-10-20T13:50:25+00:00",
   "geopend": "2026-10-20T13:50:25+00:00",
-  "open": true,
+  "open": false,
   "tekst": "di 29 dec 13:00-17:00 Politieacademie Rotterdam (Regulier)"
  },
  "76416": {
@@ -728,25 +728,25 @@
  "76424": {
   "gevonden": "2026-10-20T13:50:25+00:00",
   "geopend": "2026-10-20T13:50:25+00:00",
-  "open": true,
+  "open": false,
   "tekst": "wo 30 dec 08:00-12:00 Politieacademie Rotterdam (Regulier)"
  },
  "76423": {
   "gevonden": "2026-10-20T13:50:25+00:00",
   "geopend": "2026-10-20T13:50:25+00:00",
-  "open": true,
+  "open": false,
   "tekst": "wo 30 dec 08:00-12:00 Politieacademie Rotterdam (Regulier)"
  },
  "76426": {
   "gevonden": "2026-10-20T13:50:25+00:00",
   "geopend": "2026-10-20T13:50:25+00:00",
-  "open": true,
+  "open": false,
   "tekst": "wo 30 dec 13:00-17:00 Politieacademie Rotterdam (Regulier Vrouw)"
  },
  "76425": {
   "gevonden": "2026-10-20T13:50:25+00:00",
   "geopend": "2026-10-20T13:50:25+00:00",
-  "open": true,
+  "open": false,
   "tekst": "wo 30 dec 13:00-17:00 Politieacademie Rotterdam (Regulier)"
  }
 }
