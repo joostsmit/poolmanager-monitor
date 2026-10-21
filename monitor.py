@@ -25,10 +25,12 @@ SEEN_FILE = "seen.json"
 SUMMARY_FILE = "last_summary.txt"  # moment van het laatst verstuurde overzicht
 TZ = ZoneInfo("Europe/Amsterdam")
 SUMMARY_HOURS = (12, 18)  # tijden van het dagelijkse overzicht
-# Maximale grootte van één pushbericht. ntfy noemt 4096 bytes, maar de pushdiensten van
-# Google/Apple tellen titel en extra gegevens mee; een bericht van 3,7 KB kwam al niet aan.
-# Daarom ruim eronder. Langere berichten worden in delen verstuurd (1/2, 2/2).
-MAX_BYTES = 2000
+CHECK_MINUTES = 4  # zo vaak start cron-job.org de monitor
+# Maximale grootte van één pushbericht. Langere berichten worden in delen verstuurd (1/2, 2/2).
+# ntfy noemt 4096 bytes, maar de pushdiensten van Google/Apple tellen titel en extra gegevens mee;
+# een bericht van 3,7 KB kwam al niet aan. Daarom ruim eronder.
+NTFY_MAX_BYTES = 2000
+PUSHOVER_MAX_BYTES = 1000  # Pushover accepteert max. 1024 tekens per bericht
 MAX_PARTS = 5  # nooit meer dan 5 berichten tegelijk
 MONTH_ABBR = {"januari": "jan", "februari": "feb", "maart": "mrt", "april": "apr", "mei": "mei", "juni": "jun",
               "juli": "jul", "augustus": "aug", "september": "sep", "oktober": "okt", "november": "nov", "december": "dec"}
@@ -122,49 +124,84 @@ def fetch_items(session):
     return all_items
 
 
-def split(body):
-    """Verdeel een bericht in delen van max. MAX_BYTES, zonder regels te breken."""
+def split(body, max_bytes):
+    """Verdeel een bericht in delen van max. max_bytes, zonder regels te breken."""
     parts, cur = [], []
     for line in body.split("\n"):
-        line = line.encode()[:MAX_BYTES].decode(errors="ignore")  # extreem lange regel afkappen
-        if cur and len("\n".join(cur + [line]).encode()) > MAX_BYTES:
+        line = line.encode()[:max_bytes].decode(errors="ignore")  # extreem lange regel afkappen
+        if cur and len("\n".join(cur + [line]).encode()) > max_bytes:
             parts.append(cur)
             cur = []
         cur.append(line)
     parts.append(cur)
     if len(parts) > MAX_PARTS:
         parts, more = parts[:MAX_PARTS], "… en meer, zie Poolmanager"
-        while len("\n".join(parts[-1] + [more]).encode()) > MAX_BYTES:
+        while len("\n".join(parts[-1] + [more]).encode()) > max_bytes:
             parts[-1].pop()
         parts[-1].append(more)
     return ["\n".join(p) for p in parts]
 
 
-def send(title, body, priority="default", tags="swimmer", click=AGENDA_URL, buttons=()):
-    """Alle meldingen gaan via deze functie, zodat de groottegrens altijd geldt.
+def numbered(title, parts):
+    return [(title if len(parts) == 1 else f"{title} ({n}/{len(parts)})", part) for n, part in enumerate(parts, 1)]
 
-    priority: ntfy-prioriteit ("default", "high" of "max"). "max" = hard geluid en kan door Niet storen heen.
-    click: pagina die opent als je op de melding tikt.
-    buttons: max. 3 (tekst, url)-knoppen onder de melding; alleen bij het eerste deel.
-    """
-    topic = os.environ.get("NTFY_TOPIC")
-    parts = split(body)
-    for n, part in enumerate(parts, 1):
-        part_title = title if len(parts) == 1 else f"{title} ({n}/{len(parts)})"
-        assert len(part.encode()) <= MAX_BYTES
-        message = {
-            "topic": topic, "title": part_title, "message": part, "priority": {"default": 3, "high": 4, "max": 5}[priority],
-            "tags": tags.split(","), "click": click,
-            "actions": [{"action": "view", "label": label, "url": url} for label, url in buttons[:3]] if n == 1 else [],
-        }
-        if not topic:
-            print(f"Geen NTFY_TOPIC ingesteld, niet verstuurd: {part_title}\n{part}")
-            for a in message["actions"]:
-                print(f"  [knop] {a['label']} -> {a['url']}")
-            continue
+
+def send_ntfy(topic, title, body, priority, tags, click, buttons):
+    for n, (part_title, part) in enumerate(numbered(title, split(body, NTFY_MAX_BYTES)), 1):
+        assert len(part.encode()) <= NTFY_MAX_BYTES
         # Als JSON versturen: dan mogen titel en knoppen ook tekens als é bevatten.
-        requests.post("https://ntfy.sh/", json=message, timeout=30).raise_for_status()
-        print(f"Melding verstuurd: {part_title} ({len(part.encode())} bytes)")
+        requests.post("https://ntfy.sh/", timeout=30, json={
+            "topic": topic, "title": part_title, "message": part, "tags": tags.split(","), "click": click,
+            "priority": {"default": 3, "high": 4, "max": 5}[priority],
+            "actions": [{"action": "view", "label": label, "url": url} for label, url in buttons[:3]] if n == 1 else [],
+        }).raise_for_status()
+        print(f"ntfy: verstuurd: {part_title} ({len(part.encode())} bytes)")
+
+
+def send_pushover(user, token, title, body, priority, click):
+    for n, (part_title, part) in enumerate(numbered(title, split(body, PUSHOVER_MAX_BYTES)), 1):
+        assert len(part) <= 1024
+        # "max" = noodmelding: blijft elke minuut afgaan (max. 30 min) tot je hem in de app bevestigt.
+        # Alleen het eerste deel, anders gaan er meerdere alarmen tegelijk af.
+        level = {"default": 0, "high": 1, "max": 2}[priority]
+        if n > 1:
+            level = min(level, 1)
+        data = {"token": token, "user": user, "title": part_title, "message": part, "priority": level,
+                "url": click, "url_title": "Open opdracht (Zelfroosteren)" if click != AGENDA_URL else "Open agenda"}
+        if level == 2:
+            data.update(retry=60, expire=1800)
+        requests.post("https://api.pushover.net/1/messages.json", data=data, timeout=30).raise_for_status()
+        print(f"Pushover: verstuurd: {part_title} ({len(part)} tekens)")
+
+
+def send(title, body, priority="default", tags="swimmer", click=AGENDA_URL, buttons=()):
+    """Alle meldingen gaan via deze functie, naar elk ingesteld kanaal (Pushover en/of ntfy).
+
+    priority: "default", "high" of "max". "max" = komt door stil/Niet storen heen (Pushover: blijft afgaan).
+    click: pagina die opent als je op de melding tikt.
+    buttons: max. 3 (tekst, url)-knoppen onder de melding (alleen ntfy).
+    """
+    channels = []
+    if os.environ.get("PUSHOVER_USER_KEY") and os.environ.get("PUSHOVER_APP_TOKEN"):
+        channels.append(("Pushover", lambda: send_pushover(
+            os.environ["PUSHOVER_USER_KEY"], os.environ["PUSHOVER_APP_TOKEN"], title, body, priority, click)))
+    if os.environ.get("NTFY_TOPIC"):
+        channels.append(("ntfy", lambda: send_ntfy(os.environ["NTFY_TOPIC"], title, body, priority, tags, click, buttons)))
+    if not channels:
+        print(f"Geen meldingskanaal ingesteld, niet verstuurd: {title}\n{body}")
+        for label, url in buttons[:3]:
+            print(f"  [knop] {label} -> {url}")
+        return
+    # Valt één kanaal uit, dan gaat de melding toch via het andere. Alleen als alles mislukt is het een fout.
+    errors = []
+    for name, deliver in channels:
+        try:
+            deliver()
+        except Exception as e:
+            errors.append(f"{name}: {e}")
+            print(f"{name}: versturen MISLUKT: {e}")
+    if len(errors) == len(channels):
+        raise MonitorError("Melding versturen mislukt (" + "; ".join(errors) + ")")
 
 
 def describe(item):
@@ -215,7 +252,7 @@ def summary(seen, items, forced):
     ]
     if failed:
         lines.insert(2, f"- Let op: {failed} controle(s) mislukt")
-    expected = int((now - since).total_seconds() // 300)
+    expected = int((now - since).total_seconds() // (CHECK_MINUTES * 60))
     if ok is not None and ok + 1 < expected // 2:
         lines.insert(2, f"- Let op: minder controles dan verwacht (~{expected}). Werkt cron-job.org nog?")
     lines += [
@@ -273,13 +310,13 @@ def previous_failures():
 
 
 def report_failure(error):
-    """Waarschuw bij de eerste mislukte controle, daarna elk uur (12 runs) zolang het misgaat."""
+    """Waarschuw bij de eerste mislukte controle, daarna elk uur zolang het misgaat."""
     n = previous_failures()
-    if n is not None and n % 12:
+    if n is not None and n % (60 // CHECK_MINUTES):
         print("Fout al eerder gemeld.")
         return
     try:
-        send("Poolmanager monitor werkt NIET", f"{error}\n\nDe monitor probeert het elke 5 minuten opnieuw. "
+        send("Poolmanager monitor werkt NIET", f"{error}\n\nDe monitor probeert het elke {CHECK_MINUTES} minuten opnieuw. "
              "Zolang het misgaat krijg je elk uur deze melding. Kijk in GitHub bij Actions voor details.",
              priority="high", tags="warning")
     except Exception as e:  # ntfy zelf onbereikbaar: de rode run in GitHub blijft over
