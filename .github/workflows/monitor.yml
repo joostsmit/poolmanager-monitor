@@ -9,6 +9,10 @@ on:
         description: "Ook het overzicht versturen"
         type: boolean
         default: false
+      testmelding:
+        description: "Testmelding versturen (zelfde prioriteit als een nieuwe opdracht)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write           # nodig om seen.json op te slaan
@@ -41,6 +45,8 @@ jobs:
           PUSHOVER_APP_TOKEN: ${{ secrets.PUSHOVER_APP_TOKEN }}
           GITHUB_TOKEN: ${{ github.token }}
           FORCE_SUMMARY: ${{ inputs.overzicht }}
+          TEST_NOTIFICATION: ${{ inputs.testmelding }}
+          PUSHOVER_EMERGENCY: ${{ vars.PUSHOVER_EMERGENCY }}  # Variable 'true' = herhalende noodmelding
         run: python monitor.py
 
       - name: Gezien-lijst opslaan

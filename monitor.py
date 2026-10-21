@@ -161,9 +161,11 @@ def send_ntfy(topic, title, body, priority, tags, click, buttons):
 def send_pushover(user, token, title, body, priority, click):
     for n, (part_title, part) in enumerate(numbered(title, split(body, PUSHOVER_MAX_BYTES)), 1):
         assert len(part) <= 1024
-        # "max" = noodmelding: blijft elke minuut afgaan (max. 30 min) tot je hem in de app bevestigt.
-        # Alleen het eerste deel, anders gaan er meerdere alarmen tegelijk af.
-        level = {"default": 0, "high": 1, "max": 2}[priority]
+        # "max" = hoge prioriteit (1x). Met PUSHOVER_EMERGENCY=true wordt het een noodmelding: die blijft
+        # elke minuut afgaan (max. 30 min) tot je hem in de app bevestigt. Alleen het eerste deel, anders
+        # gaan er meerdere alarmen tegelijk af.
+        emergency = os.environ.get("PUSHOVER_EMERGENCY", "").lower() == "true"
+        level = {"default": 0, "high": 1, "max": 2 if emergency else 1}[priority]
         if n > 1:
             level = min(level, 1)
         data = {"token": token, "user": user, "title": part_title, "message": part, "priority": level,
@@ -329,7 +331,17 @@ def report_recovery():
         send("Poolmanager monitor werkt weer", f"Na {n} mislukte controle(s) werkt alles weer.", tags="white_check_mark")
 
 
+def send_test():
+    """Testmelding via alle kanalen, met dezelfde prioriteit als een nieuwe opdracht."""
+    now = datetime.now(TZ)
+    send("Testmelding Poolmanager monitor",
+         f"Verstuurd om {now:%H:%M:%S}. Zie je dit op je telefoon en Watch, dan komen meldingen over "
+         "nieuwe opdrachten ook aan.", priority="max")
+
+
 def main():
+    if os.environ.get("TEST_NOTIFICATION") == "true":
+        send_test()
     try:
         check()
     except Exception as e:

@@ -17,8 +17,19 @@ Kijkt elke 4 minuten (gestart via cron-job.org, zie stap 4) in je Poolmanager-ka
 2. Log in op https://pushover.net. Rechtsboven staat **Your User Key**: kopieer die (dit is `PUSHOVER_USER_KEY`).
 3. Klik onderaan op **Create an Application/API Token**. Naam: `Poolmanager`. Vink de voorwaarden aan en klik op **Create Application**.
    Kopieer de **API Token/Key** (dit is `PUSHOVER_APP_TOKEN`).
-4. **Belangrijk – door stil en Niet storen heen:** open in de Pushover-app de instellingen en zet **Critical Alerts** aan voor *Emergency priority* (en eventueel *High priority*). De iPhone vraagt dan om toestemming: kies **Sta toe**.
-5. Nieuwe opdrachten komen als **noodmelding**: die gaat elke minuut opnieuw af (max. 30 minuten) tot je hem in de Pushover-app **bevestigt** (*Acknowledge*).
+4. **Focus en Niet storen:** zet Pushover bij elk focusprofiel dat je gebruikt (Werk, Slapen, Niet storen, …) op de lijst met toegestane apps:
+   *Instellingen → Focus → [profiel] → Apps → Voeg toe → Pushover*.
+5. **Apple Watch:** open de Watch-app op je iPhone → *Meldingen* → *Pushover* → *Spiegel iPhone-meldingen*.
+   De Watch toont meldingen als je iPhone op slot staat.
+6. **Testen:** GitHub → **Actions** → **Poolmanager monitor** → **Run workflow** → vink **Testmelding versturen** aan.
+   Test met je iPhone op slot, je focusprofiel aan en je Watch om.
+
+**Hoe hard komt een nieuwe opdracht binnen?**
+- Standaard: **hoge prioriteit**, één melding.
+- Wil je dat de melding ook door stil en focus heen komt: zet in de Pushover-app bij *Settings* **Critical Alerts** aan voor *High priority*.
+- Wil je een **noodmelding** die elke minuut opnieuw afgaat (max. 30 minuten) tot je hem in de app bevestigt:
+  GitHub → **Settings** → **Secrets and variables** → **Actions** → tabblad **Variables** → **New repository variable**:
+  name `PUSHOVER_EMERGENCY`, value `true`. Terugzetten: verwijder de variable.
 
 ## 1b. ntfy instellen (optioneel, reserve)
 
