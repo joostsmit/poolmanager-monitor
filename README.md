@@ -1,16 +1,30 @@
 # Poolmanager monitor
 
-Kijkt elke 5 minuten (gestart via cron-job.org, zie stap 4) in je Poolmanager-kalender en stuurt een pushmelding naar je telefoon als er een **nieuwe open opdracht** bij komt.
+Kijkt elke 4 minuten (gestart via cron-job.org, zie stap 4) in je Poolmanager-kalender en stuurt een pushmelding naar je telefoon als er een **nieuwe open opdracht** bij komt.
 
 - **Gele** items (open opdrachten) → hierover krijg je een melding. Ook als een opdracht die al weg was **weer open** komt (bijv. teruggegeven door een collega).
 - **Groene** items (al ingeschreven) en grijze items (je beschikbaarheid) → worden genegeerd.
-- Tik op de melding (bij één opdracht) of op een knop **Open …** om meteen naar de opdracht te gaan, met de knop *Zelfroosteren*. Ben je op je telefoon niet ingelogd bij Poolmanager, dan log je eerst in en kom je daarna op de opdracht.
+- Meldingen gaan naar **Pushover** (hoofdkanaal) en, als je dat ook instelt, naar **ntfy** (reserve).
+- Tik op de link in de melding (bij één opdracht) of op een knop **Open …** (ntfy) om meteen naar de opdracht te gaan, met de knop *Zelfroosteren*. Ben je op je telefoon niet ingelogd bij Poolmanager, dan log je eerst in en kom je daarna op de opdracht.
 - Er wordt 3 maanden vooruit gekeken.
 - Om **12:00 en 18:00** krijg je een overzicht: hoe vaak er sinds het vorige overzicht is gecontroleerd, hoeveel nieuwe opdrachten er zijn gevonden en hoeveel er nu open staan.
   Andere tijden? Pas `SUMMARY_HOURS` aan in `monitor.py`.
 - Wat al gezien is staat in `seen.json`. De eerste keer worden alle bestaande opdrachten alleen opgeslagen, zonder melding.
 
-## 1. ntfy-app instellen
+## 1. Pushover instellen (hoofdkanaal)
+
+1. Installeer de app **Pushover** (App Store of Google Play) en maak een account. Na 30 dagen proberen kost de app eenmalig ongeveer $5.
+2. Log in op https://pushover.net. Rechtsboven staat **Your User Key**: kopieer die (dit is `PUSHOVER_USER_KEY`).
+3. Klik onderaan op **Create an Application/API Token**. Naam: `Poolmanager`. Vink de voorwaarden aan en klik op **Create Application**.
+   Kopieer de **API Token/Key** (dit is `PUSHOVER_APP_TOKEN`).
+4. **Belangrijk – door stil en Niet storen heen:** open in de Pushover-app de instellingen en zet **Critical Alerts** aan voor *Emergency priority* (en eventueel *High priority*). De iPhone vraagt dan om toestemming: kies **Sta toe**.
+5. Nieuwe opdrachten komen als **noodmelding**: die gaat elke minuut opnieuw af (max. 30 minuten) tot je hem in de Pushover-app **bevestigt** (*Acknowledge*).
+
+## 1b. ntfy instellen (optioneel, reserve)
+
+Wil je naast Pushover ook ntfy houden, zodat er altijd een tweede kanaal is: volg deze stappen en vul `NTFY_TOPIC` in.
+Wil je alleen Pushover: verwijder het Secret `NTFY_TOPIC`.
+
 
 1. Installeer de app **ntfy** (App Store of Google Play).
 2. Bedenk een topic-naam die niemand kan raden, bijv. `joost-pool-8f3k2q9x`.
@@ -24,28 +38,30 @@ Kijkt elke 5 minuten (gestart via cron-job.org, zie stap 4) in je Poolmanager-ka
 ## 2. GitHub Secrets toevoegen
 
 1. Ga in GitHub naar deze repository → **Settings** → **Secrets and variables** → **Actions**.
-2. Klik op **New repository secret** en voeg deze drie toe:
+2. Klik op **New repository secret** en voeg deze toe:
 
 | Name                   | Secret                         |
 |------------------------|--------------------------------|
 | `POOLMANAGER_USERNAME` | je Poolmanager-gebruikersnaam  |
 | `POOLMANAGER_PASSWORD` | je Poolmanager-wachtwoord      |
-| `NTFY_TOPIC`           | je topic-naam uit stap 1       |
+| `PUSHOVER_USER_KEY`    | je User Key uit stap 1         |
+| `PUSHOVER_APP_TOKEN`   | je API Token uit stap 1        |
+| `NTFY_TOPIC`           | (optioneel) je ntfy-topic uit stap 1b |
 
 ## 3. Starten en testen
 
 1. Ga naar het tabblad **Actions** → **Poolmanager monitor** → **Run workflow**.
 2. De eerste keer zie je in het log iets als `Eerste keer: 2 opdracht(en) opgeslagen, geen melding.`
-3. Daarna draait hij vanzelf elke 5 minuten (GitHub start soms een paar minuten later).
+3. Daarna draait hij vanzelf elke 4 minuten (via cron-job.org, zie stap 4).
 
 Overzicht testen? Zet bij **Run workflow** het vinkje **Ook het overzicht versturen** aan.
 
 Testmelding forceren? Haal een id weg uit `seen.json`, commit dat, en start de workflow handmatig.
 
-## 4. Elke 5 minuten starten via cron-job.org
+## 4. Elke 4 minuten starten via cron-job.org
 
 GitHub start geplande workflows niet betrouwbaar (soms maar een paar keer per nacht).
-Daarom start de gratis dienst cron-job.org de workflow elke 5 minuten. Het GitHub-schema blijft als reserve aan.
+Daarom start de gratis dienst cron-job.org de workflow elke 4 minuten. Het GitHub-schema blijft als reserve aan.
 
 **A. Sleutel (token) maken in GitHub**
 
@@ -66,7 +82,7 @@ De token kan alleen deze workflow starten, verder niets.
 2. Tabblad **Common**:
    - **Title:** `Poolmanager monitor`
    - **URL:** `https://api.github.com/repos/joostsmit/poolmanager-monitor/actions/workflows/monitor.yml/dispatches`
-   - **Execution schedule:** *Every 5 minutes*
+   - **Execution schedule:** *Every 4 minutes* (staat die er niet bij: kies *Custom* en vink bij *Minutes* 0, 4, 8, … 56 aan)
 3. Tabblad **Advanced**:
    - **Request method:** `POST`
    - **Headers** (3 regels):
@@ -97,6 +113,6 @@ Extra vangnet: zet bij cron-job.org in je taak (tabblad **Notifications**) aan d
 
 ```bash
 pip install -r requirements.txt
-export POOLMANAGER_USERNAME=... POOLMANAGER_PASSWORD=... NTFY_TOPIC=...
+export POOLMANAGER_USERNAME=... POOLMANAGER_PASSWORD=... PUSHOVER_USER_KEY=... PUSHOVER_APP_TOKEN=...
 python monitor.py
 ```
