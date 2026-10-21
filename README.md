@@ -77,7 +77,10 @@ Daarom start de gratis dienst cron-job.org de workflow, volgens dit rooster:
 | Wanneer | Hoe vaak | Taak in cron-job.org |
 |---|---|---|
 | Ma–vr 07:00–19:59 | elke 4 minuten | *Poolmanager druk* |
-| Avond, nacht en weekend | elke 30 minuten | *Poolmanager rustig* (loopt altijd; overdag dubbelt hij een paar keer met "druk", dat is geen probleem) |
+| Ma–vr 00:00–06:59 en 20:00–23:59 | elke 30 minuten | *Poolmanager rustig doordeweeks* |
+| Za en zo, hele dag | elke 30 minuten | *Poolmanager rustig weekend* |
+
+De drie taken overlappen nergens, dus er wordt nooit dubbel gecontroleerd.
 
 Het GitHub-schema blijft als reserve aan.
 Pas je het rooster aan? Zet dan ook `BUSY_DAYS`, `BUSY_HOURS`, `BUSY_MINUTES` en `QUIET_MINUTES` in `monitor.py` goed,
@@ -96,22 +99,22 @@ anders klopt de waarschuwing *"minder controles dan verwacht"* niet.
 
 De token kan alleen deze workflow starten, verder niets.
 
-**B. Twee taken maken op cron-job.org**
+**B. Drie taken maken op cron-job.org**
 
-Maak een gratis account op https://cron-job.org. Maak dan twee taken (**Create cronjob**). Ze zijn gelijk, alleen de titel en het schema verschillen.
+Maak een gratis account op https://cron-job.org. Maak dan drie taken (**Create cronjob**). Ze zijn gelijk, alleen de titel en het schema verschillen.
 
 1. Tabblad **Common**:
-   - **Title:** `Poolmanager druk` (tweede taak: `Poolmanager rustig`)
+   - **Title:** `Poolmanager druk`, `Poolmanager rustig doordeweeks` en `Poolmanager rustig weekend`
    - **URL:** `https://api.github.com/repos/joostsmit/poolmanager-monitor/actions/workflows/monitor.yml/dispatches`
    - **Execution schedule:** kies **Custom** en vink aan:
 
-     | | Poolmanager druk | Poolmanager rustig |
-     |---|---|---|
-     | Days of month | alle | alle |
-     | Days of week | Monday t/m Friday | alle |
-     | Months | alle | alle |
-     | Hours | 7 t/m 19 | alle |
-     | Minutes | 0, 4, 8, 12, … 56 | 0 en 30 |
+     | | druk | rustig doordeweeks | rustig weekend |
+     |---|---|---|---|
+     | Days of month | alle | alle | alle |
+     | Days of week | Monday t/m Friday | Monday t/m Friday | Saturday en Sunday |
+     | Months | alle | alle | alle |
+     | Hours | 7 t/m 19 | 0 t/m 6 en 20 t/m 23 | alle |
+     | Minutes | 0, 4, 8, 12, … 56 | 0 en 30 | 0 en 30 |
 
 2. Tabblad **Advanced**:
    - **Time zone:** `Europe/Amsterdam` (staat dit er niet, zet het dan bij je accountinstellingen)
@@ -128,7 +131,7 @@ Maak een gratis account op https://cron-job.org. Maak dan twee taken (**Create c
 3. Klik op **Test run**. Status **204** = goed. Klik daarna op **Create** (of **Save**).
 4. Kijk na een paar minuten in **Actions**: daar verschijnen runs met *"Manually run by joostsmit"*.
 
-Tip: heb je al een taak? Gebruik die als *Poolmanager druk* (pas titel en schema aan) en maak met **Clone** de tweede.
+Tip: heb je al een taak? Gebruik die als *Poolmanager druk* (pas titel en schema aan) en maak met **Clone** de andere twee.
 
 ## 5. Als er iets misgaat
 
