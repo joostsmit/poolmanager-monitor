@@ -9,7 +9,7 @@ kalender wordt als HTML door de server gemaakt.
 import json
 import os
 import re
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
 import requests
@@ -37,8 +37,13 @@ QUIET_MINUTES = 30          # avond, nacht en weekend: elke 30 minuten
 NTFY_MAX_BYTES = 2000
 PUSHOVER_MAX_BYTES = 1000  # Pushover accepteert max. 1024 tekens per bericht
 MAX_PARTS = 5  # nooit meer dan 5 berichten tegelijk
+KEEP_DAYS = 7  # opdrachten in seen.json bewaren tot 7 dagen na de datum (daarna opgeruimd)
+TOKEN_WARN_DAYS = 14  # zoveel dagen vooraf waarschuwen dat de cron-job.org-token verloopt
 MONTH_ABBR = {"januari": "jan", "februari": "feb", "maart": "mrt", "april": "apr", "mei": "mei", "juni": "jun",
               "juli": "jul", "augustus": "aug", "september": "sep", "oktober": "okt", "november": "nov", "december": "dec"}
+
+
+MONTH_NUM = {name: n for n, name in enumerate(MONTH_ABBR, 1)}
 
 
 class MonitorError(Exception):
@@ -77,7 +82,8 @@ def parse_month(soup):
     days = soup.select("div.day_header")
     # Controle of de pagina er nog uitziet zoals verwacht. Anders zou een gewijzigde website
     # stilletjes "0 opdrachten" opleveren.
-    if month.split()[0] not in MONTH_ABBR or len(days) < 28:
+    title = re.fullmatch(r"(\w+) (\d{4})", month)
+    if not title or title.group(1) not in MONTH_NUM or len(days) < 28:
         raise MonitorError(f"Kalender ziet er anders uit dan verwacht (maand '{month}', {len(days)} dagen). "
                            "Is de website van Poolmanager veranderd?")
     blocks = soup.select("div.SelfSchedulingItem")
@@ -89,6 +95,9 @@ def parse_month(soup):
             continue
         header = item.find_previous("div", class_="day_header")
         day = " ".join(header.get_text(strip=True).split("|")[0].split()[:2]) if header else "?"
+        day_num = re.search(r"\d+", day)
+        if not day_num:
+            raise MonitorError(f"Datum '{day}' in {month} niet te lezen. Is de website van Poolmanager veranderd?")
 
         def text(cls):
             el = item.find(class_=cls)
@@ -96,7 +105,8 @@ def parse_month(soup):
 
         items.append({
             "id": m.group(1),
-            "datum": f"{day} {MONTH_ABBR.get(month.split()[0], month)}",
+            "datum": f"{day} {MONTH_ABBR[title.group(1)]}",
+            "dag": date(int(title.group(2)), MONTH_NUM[title.group(1)], int(day_num.group())).isoformat(),
             "titel": text("dayitem_title"),
             "tijd": text("dayitem_timespan"),
             "info": text("dayitem_description").removeprefix("Inplanbaar").strip(),
@@ -244,6 +254,64 @@ def count_runs(since):
     return counts
 
 
+def day_from_text(v):
+    """Datum (JJJJ-MM-DD) uit een oudere omschrijving zoals 'ma 16 nov 08:30-…' of 'ma 16 november 2026 …'."""
+    words = v.get("tekst", "").split()
+    if len(words) < 3 or not words[1].isdigit():
+        return None
+    # De maand is het eerste woord na de dag dat een maandnaam of afkorting is; een jaartal mag erachter staan.
+    for i, w in enumerate(words[2:5], 2):
+        name = next((n for n, abbr in MONTH_ABBR.items() if w in (n, abbr)), None)
+        if name:
+            break
+    else:
+        return None
+    year = next((int(w) for w in words[i + 1:i + 3] if re.fullmatch(r"\d{4}", w)), None)
+    if year is None:  # geen jaartal: het jaar waarin hij gezien is (januari gezien in december = volgend jaar)
+        seen_at = v.get("geopend") or v.get("gevonden")
+        ref = datetime.fromisoformat(seen_at).astimezone(TZ).date() if seen_at else datetime.now(TZ).date()
+        year = ref.year + (MONTH_NUM[name] < ref.month)
+    return date(year, MONTH_NUM[name], int(words[1])).isoformat()
+
+
+def prune(seen):
+    """Ruim opdrachten op waarvan de datum voorbij is, zodat seen.json niet blijft groeien.
+
+    Een opdracht die nu open staat wordt nooit opgeruimd (anders lijkt hij bij de volgende controle 'nieuw').
+    Oudere regels zonder datum: opruimen 100 dagen na de laatste keer dat hij open kwam.
+    """
+    today, now = datetime.now(TZ).date(), datetime.now(timezone.utc)
+
+    def keep(v):
+        if v["open"]:
+            return True
+        if v.get("dag"):
+            return date.fromisoformat(v["dag"]) >= today - timedelta(days=KEEP_DAYS)
+        last = v.get("geopend") or v.get("gevonden")
+        return bool(last) and now - datetime.fromisoformat(last) < timedelta(days=100)
+
+    kept = {k: v for k, v in seen.items() if keep(v)}
+    if len(kept) < len(seen):
+        print(f"{len(seen) - len(kept)} verlopen opdracht(en) opgeruimd uit {SEEN_FILE}.")
+    return kept
+
+
+def token_warning():
+    """Waarschuwing als de GitHub-token van cron-job.org (bijna) verloopt. Datum staat in variable CRON_TOKEN_EXPIRES."""
+    expires = os.environ.get("CRON_TOKEN_EXPIRES", "").strip()
+    if not expires:
+        return None
+    try:
+        days = (date.fromisoformat(expires) - datetime.now(TZ).date()).days
+    except ValueError:
+        return f"- Let op: CRON_TOKEN_EXPIRES '{expires}' is geen geldige datum (gebruik JJJJ-MM-DD)."
+    if days < 0:
+        return f"- Let op: de GitHub-token voor cron-job.org is VERLOPEN ({expires}). Maak een nieuwe (README stap 4)."
+    if days <= TOKEN_WARN_DAYS:
+        return f"- Let op: de GitHub-token voor cron-job.org verloopt over {days} dag(en) ({expires}). Maak een nieuwe (README stap 4)."
+    return None
+
+
 def summary(seen, items, forced):
     """Overzicht sinds het vorige overzichtsmoment."""
     now = datetime.now(TZ)
@@ -259,6 +327,8 @@ def summary(seen, items, forced):
     ]
     if failed:
         lines.insert(2, f"- Let op: {failed} controle(s) mislukt")
+    if token_warning():
+        lines.insert(2, token_warning())
     expected = expected_checks(since, now)
     if ok is not None and ok + 1 < expected // 2:
         lines.insert(2, f"- Let op: minder controles dan verwacht (~{expected}). Werkt cron-job.org nog?")
@@ -384,6 +454,8 @@ def check():
         if "open" not in v:  # ouder formaat: open-status nog onbekend, nu vastleggen zonder melding
             v["open"] = k in items
             v.setdefault("geopend", v["gevonden"])
+        if "dag" not in v and day_from_text(v):  # ouder formaat: datum uit de omschrijving halen
+            v["dag"] = day_from_text(v)
     # Melden wat nu open is en bij de vorige controle niet: nieuw, of weer open (bijv. teruggegeven).
     newly_open = [i for k, i in items.items() if k not in seen or not seen[k]["open"]]
     reopened = {i["id"] for i in newly_open if i["id"] in seen}
@@ -405,7 +477,8 @@ def check():
         entry["open"] = True
     for k, item in items.items():
         seen[k]["tekst"] = describe(item)
-    seen = dict(list(seen.items())[-1000:])
+        seen[k]["dag"] = item["dag"]
+    seen = prune(seen)
     with open(SEEN_FILE, "w") as f:
         json.dump(seen, f, indent=1)
 

@@ -27,9 +27,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: pip
@@ -46,7 +46,8 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           FORCE_SUMMARY: ${{ inputs.overzicht }}
           TEST_NOTIFICATION: ${{ inputs.testmelding }}
-          PUSHOVER_EMERGENCY: ${{ vars.PUSHOVER_EMERGENCY }}  # Variable 'true' = herhalende noodmelding
+          PUSHOVER_EMERGENCY: ${{ vars.PUSHOVER_EMERGENCY }}
+          CRON_TOKEN_EXPIRES: ${{ vars.CRON_TOKEN_EXPIRES }}  # Variable JJJJ-MM-DD: waarschuwing in overzicht  # Variable 'true' = herhalende noodmelding
         run: python monitor.py
 
       - name: Gezien-lijst opslaan
@@ -54,4 +55,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add seen.json last_summary.txt 2>/dev/null || git add seen.json
-          git diff --cached --quiet || (git commit -m "Gezien-lijst bijgewerkt" && git push)
+          git diff --cached --quiet && exit 0
+          git commit -m "Gezien-lijst bijgewerkt"
+          # Is main intussen gewijzigd (bijv. door een handmatige aanpassing)? Dan eerst bijwerken en opnieuw proberen.
+          for i in 1 2 3; do git push && exit 0; git pull --rebase -q || exit 1; done
+          exit 1
