@@ -1,6 +1,6 @@
 # Poolmanager monitor
 
-Kijkt elke 4 minuten (gestart via cron-job.org, zie stap 4) in je Poolmanager-kalender en stuurt een pushmelding naar je telefoon als er een **nieuwe open opdracht** bij komt.
+Kijkt doordeweeks overdag elke 4 minuten en verder elke 30 minuten (gestart via cron-job.org, zie stap 4) in je Poolmanager-kalender en stuurt een pushmelding naar je telefoon als er een **nieuwe open opdracht** bij komt.
 
 - **Gele** items (open opdrachten) → hierover krijg je een melding. Ook als een opdracht die al weg was **weer open** komt (bijv. teruggegeven door een collega).
 - **Groene** items (al ingeschreven) en grijze items (je beschikbaarheid) → worden genegeerd.
@@ -63,16 +63,28 @@ Wil je alleen Pushover: verwijder het Secret `NTFY_TOPIC`.
 
 1. Ga naar het tabblad **Actions** → **Poolmanager monitor** → **Run workflow**.
 2. De eerste keer zie je in het log iets als `Eerste keer: 2 opdracht(en) opgeslagen, geen melding.`
-3. Daarna draait hij vanzelf elke 4 minuten (via cron-job.org, zie stap 4).
+3. Daarna draait hij vanzelf volgens het rooster (via cron-job.org, zie stap 4).
 
 Overzicht testen? Zet bij **Run workflow** het vinkje **Ook het overzicht versturen** aan.
 
 Testmelding forceren? Haal een id weg uit `seen.json`, commit dat, en start de workflow handmatig.
 
-## 4. Elke 4 minuten starten via cron-job.org
+## 4. Starten via cron-job.org
 
 GitHub start geplande workflows niet betrouwbaar (soms maar een paar keer per nacht).
-Daarom start de gratis dienst cron-job.org de workflow elke 4 minuten. Het GitHub-schema blijft als reserve aan.
+Daarom start de gratis dienst cron-job.org de workflow, volgens dit rooster:
+
+| Wanneer | Hoe vaak | Taak in cron-job.org |
+|---|---|---|
+| Ma–vr 07:00–19:59 | elke 4 minuten | *Poolmanager druk* |
+| Ma–vr 00:00–06:59 en 20:00–23:59 | elke 30 minuten | *Poolmanager rustig doordeweeks* |
+| Za en zo, hele dag | elke 30 minuten | *Poolmanager rustig weekend* |
+
+De drie taken overlappen nergens, dus er wordt nooit dubbel gecontroleerd.
+
+Het GitHub-schema blijft als reserve aan.
+Pas je het rooster aan? Zet dan ook `BUSY_DAYS`, `BUSY_HOURS`, `BUSY_MINUTES` en `QUIET_MINUTES` in `monitor.py` goed,
+anders klopt de waarschuwing *"minder controles dan verwacht"* niet.
 
 **A. Sleutel (token) maken in GitHub**
 
@@ -87,14 +99,25 @@ Daarom start de gratis dienst cron-job.org de workflow elke 4 minuten. Het GitHu
 
 De token kan alleen deze workflow starten, verder niets.
 
-**B. Taak maken op cron-job.org**
+**B. Drie taken maken op cron-job.org**
 
-1. Maak een gratis account op https://cron-job.org en klik op **Create cronjob**.
-2. Tabblad **Common**:
-   - **Title:** `Poolmanager monitor`
+Maak een gratis account op https://cron-job.org. Maak dan drie taken (**Create cronjob**). Ze zijn gelijk, alleen de titel en het schema verschillen.
+
+1. Tabblad **Common**:
+   - **Title:** `Poolmanager druk`, `Poolmanager rustig doordeweeks` en `Poolmanager rustig weekend`
    - **URL:** `https://api.github.com/repos/joostsmit/poolmanager-monitor/actions/workflows/monitor.yml/dispatches`
-   - **Execution schedule:** *Every 4 minutes* (staat die er niet bij: kies *Custom* en vink bij *Minutes* 0, 4, 8, … 56 aan)
-3. Tabblad **Advanced**:
+   - **Execution schedule:** kies **Custom** en vink aan:
+
+     | | druk | rustig doordeweeks | rustig weekend |
+     |---|---|---|---|
+     | Days of month | alle | alle | alle |
+     | Days of week | Monday t/m Friday | Monday t/m Friday | Saturday en Sunday |
+     | Months | alle | alle | alle |
+     | Hours | 7 t/m 19 | 0 t/m 6 en 20 t/m 23 | alle |
+     | Minutes | 0, 4, 8, 12, … 56 | 0 en 30 | 0 en 30 |
+
+2. Tabblad **Advanced**:
+   - **Time zone:** `Europe/Amsterdam` (staat dit er niet, zet het dan bij je accountinstellingen)
    - **Request method:** `POST`
    - **Headers** (3 regels):
 
@@ -105,8 +128,10 @@ De token kan alleen deze workflow starten, verder niets.
      | `Content-Type`  | `application/json`            |
 
    - **Request body:** `{"ref":"main"}`
-4. Klik op **Test run**. Status **204** = goed. Klik daarna op **Create**.
-5. Kijk na een paar minuten in **Actions**: daar verschijnen runs met *"Manually run by joostsmit"*.
+3. Klik op **Test run**. Status **204** = goed. Klik daarna op **Create** (of **Save**).
+4. Kijk na een paar minuten in **Actions**: daar verschijnen runs met *"Manually run by joostsmit"*.
+
+Tip: heb je al een taak? Gebruik die als *Poolmanager druk* (pas titel en schema aan) en maak met **Clone** de andere twee.
 
 ## 5. Als er iets misgaat
 

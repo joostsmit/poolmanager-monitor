@@ -25,7 +25,12 @@ SEEN_FILE = "seen.json"
 SUMMARY_FILE = "last_summary.txt"  # moment van het laatst verstuurde overzicht
 TZ = ZoneInfo("Europe/Amsterdam")
 SUMMARY_HOURS = (12, 18)  # tijden van het dagelijkse overzicht
-CHECK_MINUTES = 4  # zo vaak start cron-job.org de monitor
+# Rooster zoals ingesteld in cron-job.org (zie README stap 4). Alleen gebruikt om te controleren of
+# de monitor vaak genoeg gestart wordt; het echte starten doet cron-job.org.
+BUSY_DAYS = range(0, 5)     # maandag t/m vrijdag
+BUSY_HOURS = range(7, 20)   # 07:00 t/m 19:59
+BUSY_MINUTES = 4            # druk: elke 4 minuten
+QUIET_MINUTES = 30          # avond, nacht en weekend: elke 30 minuten
 # Maximale grootte van één pushbericht. Langere berichten worden in delen verstuurd (1/2, 2/2).
 # ntfy noemt 4096 bytes, maar de pushdiensten van Google/Apple tellen titel en extra gegevens mee;
 # een bericht van 3,7 KB kwam al niet aan. Daarom ruim eronder.
@@ -254,7 +259,7 @@ def summary(seen, items, forced):
     ]
     if failed:
         lines.insert(2, f"- Let op: {failed} controle(s) mislukt")
-    expected = int((now - since).total_seconds() // (CHECK_MINUTES * 60))
+    expected = expected_checks(since, now)
     if ok is not None and ok + 1 < expected // 2:
         lines.insert(2, f"- Let op: minder controles dan verwacht (~{expected}). Werkt cron-job.org nog?")
     lines += [
@@ -266,6 +271,16 @@ def summary(seen, items, forced):
     lines += ["", f"Je kunt je nu nog inschrijven op {len(items)} opdracht(en) (komende {MONTHS} maanden)" + (":" if items else ".")]
     lines += [f"  • {describe(i)}" for i in items.values()]
     send(f"Poolmanager overzicht {now:%H:%M}", "\n".join(lines))
+
+
+def expected_checks(start, end):
+    """Aantal controles dat volgens het rooster tussen start en end had moeten plaatsvinden."""
+    total, t = 0.0, start
+    while t < end:
+        busy = t.weekday() in BUSY_DAYS and t.hour in BUSY_HOURS
+        total += 1 / (BUSY_MINUTES if busy else QUIET_MINUTES)
+        t += timedelta(minutes=1)
+    return int(total)
 
 
 def slots(now):
@@ -293,42 +308,46 @@ def mark_summary_sent():
 
 
 def previous_failures():
-    """Aantal mislukte runs direct vóór deze run (via GitHub API), of None als dat niet lukt."""
+    """Starttijden van de mislukte runs direct vóór deze run (via GitHub API), of None als dat niet lukt."""
     token, repo = os.environ.get("GITHUB_TOKEN"), os.environ.get("GITHUB_REPOSITORY")
     if not token or not repo:
         return None
     try:
         r = requests.get(f"https://api.github.com/repos/{repo}/actions/workflows/monitor.yml/runs", timeout=30,
-                         headers={"Authorization": f"Bearer {token}"}, params={"status": "completed", "per_page": 50})
+                         headers={"Authorization": f"Bearer {token}"}, params={"status": "completed", "per_page": 100})
         r.raise_for_status()
     except requests.RequestException:
         return None
-    n = 0
+    times = []
     for run in r.json()["workflow_runs"]:
         if run["conclusion"] != "failure":
             break
-        n += 1
-    return n
+        times.append(datetime.fromisoformat(run["created_at"].replace("Z", "+00:00")))
+    return times
 
 
 def report_failure(error):
     """Waarschuw bij de eerste mislukte controle, daarna elk uur zolang het misgaat."""
-    n = previous_failures()
-    if n is not None and n % (60 // CHECK_MINUTES):
-        print("Fout al eerder gemeld.")
-        return
+    failures = previous_failures()
+    if failures:
+        # Al eerder gemeld: alleen opnieuw als er sinds de vorige mislukte run een heel uur voorbij is gegaan.
+        first, last, now = min(failures), max(failures), datetime.now(timezone.utc)
+        if (now - first) // timedelta(hours=1) == (last - first) // timedelta(hours=1):
+            print("Fout al eerder gemeld.")
+            return
     try:
-        send("Poolmanager monitor werkt NIET", f"{error}\n\nDe monitor probeert het elke {CHECK_MINUTES} minuten opnieuw. "
+        send("Poolmanager monitor werkt NIET", f"{error}\n\nDe monitor probeert het bij elke volgende controle opnieuw. "
              "Zolang het misgaat krijg je elk uur deze melding. Kijk in GitHub bij Actions voor details.",
              priority="high", tags="warning")
-    except Exception as e:  # ntfy zelf onbereikbaar: de rode run in GitHub blijft over
+    except Exception as e:  # kanalen zelf onbereikbaar: de rode run in GitHub blijft over
         print("Waarschuwing versturen mislukt:", e)
 
 
 def report_recovery():
-    n = previous_failures()
-    if n:
-        send("Poolmanager monitor werkt weer", f"Na {n} mislukte controle(s) werkt alles weer.", tags="white_check_mark")
+    failures = previous_failures()
+    if failures:
+        send("Poolmanager monitor werkt weer", f"Na {len(failures)} mislukte controle(s) werkt alles weer.",
+             tags="white_check_mark")
 
 
 def send_test():
