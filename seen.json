@@ -349,13 +349,6 @@
   "geopend": "2026-10-12T10:10:25+00:00",
   "dag": "2026-12-21"
  },
- "76016": {
-  "gevonden": "2026-10-12T10:20:21+00:00",
-  "tekst": "do 15 okt 10:30-15:30 Politieacademie Leusden (Regulier)",
-  "open": false,
-  "geopend": "2026-10-12T10:20:21+00:00",
-  "dag": "2026-10-15"
- },
  "73899": {
   "gevonden": "2026-10-12T10:40:24+00:00",
   "tekst": "vr 16 okt 13:30-17:30 Politieacademie Leusden (Regulier)",
@@ -377,13 +370,6 @@
   "geopend": "2026-10-12T14:20:30+00:00",
   "dag": "2026-11-10"
  },
- "76082": {
-  "gevonden": "2026-10-12T15:25:24+00:00",
-  "tekst": "do 15 okt 13:00-17:00 Politieacademie Eindhoven (Regulier)",
-  "open": false,
-  "geopend": "2026-10-12T15:25:24+00:00",
-  "dag": "2026-10-15"
- },
  "72290": {
   "gevonden": "2026-10-13T05:25:16+00:00",
   "tekst": "di 20 okt 08:00-12:00 Politieacademie Rotterdam (Gespecialiseerd BPO)",
@@ -397,20 +383,6 @@
   "open": false,
   "geopend": "2026-10-13T05:25:16+00:00",
   "dag": "2026-10-20"
- },
- "72628": {
-  "gevonden": "2026-10-13T05:30:37+00:00",
-  "tekst": "do 15 okt 08:30-15:30 Politieacademie Leusden (Regulier)",
-  "open": false,
-  "geopend": "2026-10-13T05:30:37+00:00",
-  "dag": "2026-10-15"
- },
- "76144": {
-  "gevonden": "2026-10-13T05:40:21+00:00",
-  "tekst": "do 15 okt 13:30-15:30 Politieacademie Leusden (Regulier)",
-  "open": false,
-  "geopend": "2026-10-13T05:40:21+00:00",
-  "dag": "2026-10-15"
  },
  "76146": {
   "gevonden": "2026-10-13T05:45:24+00:00",
