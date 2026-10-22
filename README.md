@@ -10,6 +10,7 @@ Kijkt doordeweeks overdag elke 4 minuten en verder elke 30 minuten (gestart via 
 - Om **12:00 en 18:00** krijg je een overzicht: hoe vaak er sinds het vorige overzicht is gecontroleerd, hoeveel nieuwe opdrachten er zijn gevonden en hoeveel er nu open staan.
   Andere tijden? Pas `SUMMARY_HOURS` aan in `monitor.py`.
 - Wat al gezien is staat in `seen.json`. De eerste keer worden alle bestaande opdrachten alleen opgeslagen, zonder melding.
+  Opdrachten worden 7 dagen na hun datum automatisch opgeruimd, zodat het bestand niet blijft groeien.
 
 ## 1. Pushover instellen (hoofdkanaal)
 
@@ -144,6 +145,15 @@ De monitor waarschuwt je zelf als hij zijn werk niet kan doen:
 - **Geen overzicht om 12:00 of 18:00 gekregen?** Dan draait de monitor helemaal niet. Kijk in GitHub bij **Actions** en bij cron-job.org.
 
 Extra vangnet: zet bij cron-job.org in je taak (tabblad **Notifications**) aan dat je een e-mail krijgt als de taak mislukt. Dat gebeurt bijvoorbeeld als de GitHub-token verlopen is.
+
+## 6. Onderhoud: dingen die op termijn verlopen
+
+| Wat | Wanneer | Wat te doen |
+|---|---|---|
+| **GitHub-token voor cron-job.org** | Na de looptijd die je koos (max. 1 jaar) | Zet de vervaldatum als variable, dan waarschuwt het overzicht 14 dagen vooraf: GitHub → **Settings** → **Secrets and variables** → **Actions** → **Variables** → `CRON_TOKEN_EXPIRES` = `JJJJ-MM-DD`. Nieuwe token maken (stap 4A), in alle cron-job.org-taken vervangen, en de datum bijwerken. |
+| **Pushover-proefperiode** | 30 dagen na installatie | Koop de app (eenmalig) in de Pushover-app, anders stoppen de meldingen. |
+| **cron-job.org zet een taak uit** | Na veel mislukte starts op rij (bijv. storing bij GitHub) | Zet per taak bij **Notifications** de e-mail bij mislukken aan. Controleer of de taken nog *enabled* zijn als het overzicht "minder controles dan verwacht" meldt. |
+| **Poolmanager-wachtwoord** | Als je het wijzigt | Werk het Secret `POOLMANAGER_PASSWORD` bij (je krijgt anders de melding "werkt NIET"). |
 
 ## Lokaal draaien
 
