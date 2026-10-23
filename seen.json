@@ -349,20 +349,6 @@
   "geopend": "2026-10-12T10:10:25+00:00",
   "dag": "2026-12-21"
  },
- "73899": {
-  "gevonden": "2026-10-12T10:40:24+00:00",
-  "tekst": "vr 16 okt 13:30-17:30 Politieacademie Leusden (Regulier)",
-  "open": false,
-  "geopend": "2026-10-12T10:40:24+00:00",
-  "dag": "2026-10-16"
- },
- "72631": {
-  "gevonden": "2026-10-12T13:55:25+00:00",
-  "tekst": "vr 16 okt 13:30-15:30 Politieacademie Leusden (Regulier)",
-  "open": false,
-  "geopend": "2026-10-12T13:55:25+00:00",
-  "dag": "2026-10-16"
- },
  "71741": {
   "gevonden": "2026-10-12T14:20:30+00:00",
   "tekst": "di 10 nov 12:00-16:30 PA Ossendrecht Conflict en Crisis b (Licht Fysiek)",
@@ -384,13 +370,6 @@
   "geopend": "2026-10-13T05:25:16+00:00",
   "dag": "2026-10-20"
  },
- "76146": {
-  "gevonden": "2026-10-13T05:45:24+00:00",
-  "tekst": "vr 16 okt 08:00-17:00 Politieacademie Apeldoorn (Regulier Vrouw)",
-  "open": false,
-  "geopend": "2026-10-13T05:45:24+00:00",
-  "dag": "2026-10-16"
- },
  "76156": {
   "gevonden": "2026-10-13T10:00:47+00:00",
   "tekst": "ma 09 nov 08:30-12:30 Politieacademie Leusden (Licht Fysiek)",
@@ -411,13 +390,6 @@
   "open": false,
   "geopend": "2026-10-13T14:25:22+00:00",
   "dag": "2026-12-11"
- },
- "72285": {
-  "gevonden": "2026-10-14T05:30:35+00:00",
-  "tekst": "vr 16 okt 08:00-12:00 Politieacademie Rotterdam (Regulier Engels)",
-  "open": false,
-  "geopend": "2026-10-14T05:30:35+00:00",
-  "dag": "2026-10-16"
  },
  "71385": {
   "gevonden": "2026-10-15T09:40:28+00:00",
