@@ -782,5 +782,117 @@
   "open": false,
   "tekst": "ma 26 okt 16:30-20:30 OBT Noord Nederland (Zwaar Fysiek)",
   "dag": "2026-10-26"
+ },
+ "76675": {
+  "gevonden": "2026-10-26T09:16:47+00:00",
+  "geopend": "2026-10-26T09:16:47+00:00",
+  "open": true,
+  "tekst": "ma 09 nov 08:00-10:00 Politieacademie Amsterdam (Regulier Engels)",
+  "dag": "2026-11-09"
+ },
+ "76676": {
+  "gevonden": "2026-10-26T09:16:47+00:00",
+  "geopend": "2026-10-26T09:16:47+00:00",
+  "open": true,
+  "tekst": "di 10 nov 13:00-17:00 Politieacademie Amsterdam (Regulier Engels)",
+  "dag": "2026-11-10"
+ },
+ "76677": {
+  "gevonden": "2026-10-26T09:16:47+00:00",
+  "geopend": "2026-10-26T09:16:47+00:00",
+  "open": true,
+  "tekst": "wo 11 nov 08:00-12:00 Politieacademie Amsterdam (Regulier Engels)",
+  "dag": "2026-11-11"
+ },
+ "76679": {
+  "gevonden": "2026-10-26T09:16:47+00:00",
+  "geopend": "2026-10-26T09:16:47+00:00",
+  "open": true,
+  "tekst": "ma 16 nov 08:00-12:00 Politieacademie Amsterdam (Regulier)",
+  "dag": "2026-11-16"
+ },
+ "76680": {
+  "gevonden": "2026-10-26T09:16:47+00:00",
+  "geopend": "2026-10-26T09:16:47+00:00",
+  "open": true,
+  "tekst": "ma 16 nov 13:00-17:00 Politieacademie Amsterdam (Regulier)",
+  "dag": "2026-11-16"
+ },
+ "76683": {
+  "gevonden": "2026-10-26T09:16:47+00:00",
+  "geopend": "2026-10-26T09:16:47+00:00",
+  "open": true,
+  "tekst": "wo 18 nov 08:00-15:00 Politieacademie Amsterdam (Regulier)",
+  "dag": "2026-11-18"
+ },
+ "76684": {
+  "gevonden": "2026-10-26T09:16:47+00:00",
+  "geopend": "2026-10-26T09:16:47+00:00",
+  "open": true,
+  "tekst": "do 19 nov 08:00-12:00 Politieacademie Amsterdam (Licht Fysiek)",
+  "dag": "2026-11-19"
+ },
+ "76686": {
+  "gevonden": "2026-10-26T09:16:47+00:00",
+  "geopend": "2026-10-26T09:16:47+00:00",
+  "open": true,
+  "tekst": "ma 23 nov 08:00-12:00 Politieacademie Amsterdam (Regulier)",
+  "dag": "2026-11-23"
+ },
+ "76689": {
+  "gevonden": "2026-10-26T09:16:47+00:00",
+  "geopend": "2026-10-26T09:16:47+00:00",
+  "open": true,
+  "tekst": "ma 23 nov 13:00-15:00 Politieacademie Amsterdam (Regulier)",
+  "dag": "2026-11-23"
+ },
+ "76688": {
+  "gevonden": "2026-10-26T09:16:47+00:00",
+  "geopend": "2026-10-26T09:16:47+00:00",
+  "open": true,
+  "tekst": "ma 23 nov 13:00-17:00 Politieacademie Amsterdam (Licht Fysiek)",
+  "dag": "2026-11-23"
+ },
+ "76690": {
+  "gevonden": "2026-10-26T09:16:47+00:00",
+  "geopend": "2026-10-26T09:16:47+00:00",
+  "open": true,
+  "tekst": "di 24 nov 13:00-17:00 Politieacademie Amsterdam (Licht Fysiek)",
+  "dag": "2026-11-24"
+ },
+ "76691": {
+  "gevonden": "2026-10-26T09:16:47+00:00",
+  "geopend": "2026-10-26T09:16:47+00:00",
+  "open": true,
+  "tekst": "di 24 nov 13:00-17:00 Politieacademie Amsterdam (Regulier)",
+  "dag": "2026-11-24"
+ },
+ "76694": {
+  "gevonden": "2026-10-26T09:16:47+00:00",
+  "geopend": "2026-10-26T09:16:47+00:00",
+  "open": true,
+  "tekst": "do 26 nov 08:00-12:00 Politieacademie Amsterdam (Regulier)",
+  "dag": "2026-11-26"
+ },
+ "76695": {
+  "gevonden": "2026-10-26T09:16:47+00:00",
+  "geopend": "2026-10-26T09:16:47+00:00",
+  "open": true,
+  "tekst": "do 26 nov 13:00-17:00 Politieacademie Amsterdam (Regulier)",
+  "dag": "2026-11-26"
+ },
+ "76696": {
+  "gevonden": "2026-10-26T09:16:47+00:00",
+  "geopend": "2026-10-26T09:16:47+00:00",
+  "open": true,
+  "tekst": "vr 27 nov 08:00-15:00 Politieacademie Amsterdam (Gespecialiseerd BPO)",
+  "dag": "2026-11-27"
+ },
+ "76697": {
+  "gevonden": "2026-10-26T09:16:47+00:00",
+  "geopend": "2026-10-26T09:16:47+00:00",
+  "open": true,
+  "tekst": "ma 30 nov 08:00-15:00 Politieacademie Amsterdam (Licht Fysiek)",
+  "dag": "2026-11-30"
  }
 }
