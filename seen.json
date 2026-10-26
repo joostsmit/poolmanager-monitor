@@ -894,5 +894,12 @@
   "open": false,
   "tekst": "ma 30 nov 08:00-15:00 Politieacademie Amsterdam (Licht Fysiek)",
   "dag": "2026-11-30"
+ },
+ "75296": {
+  "gevonden": "2026-10-26T11:20:49+00:00",
+  "geopend": "2026-10-26T11:20:49+00:00",
+  "open": true,
+  "tekst": "do 29 okt 12:00-16:00 OBT Oost Nederland (Zwaar Fysiek)",
+  "dag": "2026-10-29"
  }
 }
