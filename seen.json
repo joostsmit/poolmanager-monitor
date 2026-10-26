@@ -901,5 +901,12 @@
   "open": false,
   "tekst": "do 29 okt 12:00-16:00 OBT Oost Nederland (Zwaar Fysiek)",
   "dag": "2026-10-29"
+ },
+ "76754": {
+  "gevonden": "2026-10-26T16:12:49+00:00",
+  "geopend": "2026-10-26T16:12:49+00:00",
+  "open": true,
+  "tekst": "zo 15 nov 13:00-19:30 NH PVI (Zwaar Fysiek)",
+  "dag": "2026-11-15"
  }
 }
