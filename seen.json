@@ -1094,7 +1094,7 @@
  "76951": {
   "gevonden": "2026-10-27T13:20:49+00:00",
   "geopend": "2026-10-27T13:20:49+00:00",
-  "open": true,
+  "open": false,
   "tekst": "wo 18 nov 08:00-12:00 Politieacademie Apeldoorn (Regulier)",
   "dag": "2026-11-18"
  },
@@ -1115,7 +1115,7 @@
  "76953": {
   "gevonden": "2026-10-27T13:20:49+00:00",
   "geopend": "2026-10-27T13:20:49+00:00",
-  "open": true,
+  "open": false,
   "tekst": "wo 18 nov 15:00-17:00 Politieacademie Apeldoorn (Regulier)",
   "dag": "2026-11-18"
  }
