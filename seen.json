@@ -947,7 +947,7 @@
  "76806": {
   "gevonden": "2026-10-27T11:08:50+00:00",
   "geopend": "2026-10-27T11:08:50+00:00",
-  "open": true,
+  "open": false,
   "tekst": "di 24 nov 08:30-12:30 Politieacademie Eindhoven (Licht Fysiek)",
   "dag": "2026-11-24"
  },
@@ -1031,35 +1031,35 @@
  "76848": {
   "gevonden": "2026-10-27T11:08:50+00:00",
   "geopend": "2026-10-27T11:08:50+00:00",
-  "open": true,
+  "open": false,
   "tekst": "vr 11 dec 13:00-17:00 Politieacademie Eindhoven (Regulier Engels)",
   "dag": "2026-12-11"
  },
  "76850": {
   "gevonden": "2026-10-27T11:08:50+00:00",
   "geopend": "2026-10-27T11:08:50+00:00",
-  "open": true,
+  "open": false,
   "tekst": "ma 14 dec 13:00-17:00 Politieacademie Eindhoven (Licht Fysiek)",
   "dag": "2026-12-14"
  },
  "76855": {
   "gevonden": "2026-10-27T11:08:50+00:00",
   "geopend": "2026-10-27T11:08:50+00:00",
-  "open": true,
+  "open": false,
   "tekst": "vr 18 dec 08:30-12:30 Politieacademie Eindhoven (Regulier)",
   "dag": "2026-12-18"
  },
  "76859": {
   "gevonden": "2026-10-27T11:08:50+00:00",
   "geopend": "2026-10-27T11:08:50+00:00",
-  "open": true,
+  "open": false,
   "tekst": "wo 23 dec 08:30-12:30 Politieacademie Eindhoven (Regulier)",
   "dag": "2026-12-23"
  },
  "76860": {
   "gevonden": "2026-10-27T11:08:50+00:00",
   "geopend": "2026-10-27T11:08:50+00:00",
-  "open": true,
+  "open": false,
   "tekst": "wo 23 dec 13:00-17:00 Politieacademie Eindhoven (Regulier)",
   "dag": "2026-12-23"
  }
