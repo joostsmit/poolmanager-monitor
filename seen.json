@@ -197,10 +197,10 @@
  },
  "75933": {
   "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "ma 30 december 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier)",
-  "open": false,
-  "geopend": "2026-10-12T10:10:25+00:00",
-  "dag": "2026-12-30"
+  "tekst": "ma 30 nov 08:30-12:30 Politieacademie Leusden (Regulier)",
+  "open": true,
+  "geopend": "2026-10-30T17:04:47+00:00",
+  "dag": "2026-11-30"
  },
  "75936": {
   "gevonden": "2026-10-12T10:10:25+00:00",
@@ -862,15 +862,15 @@
  },
  "76796": {
   "gevonden": "2026-10-27T11:08:50+00:00",
-  "geopend": "2026-10-27T11:08:50+00:00",
-  "open": false,
+  "geopend": "2026-10-30T17:04:47+00:00",
+  "open": true,
   "tekst": "do 19 nov 08:30-12:30 Politieacademie Eindhoven (Licht Fysiek)",
   "dag": "2026-11-19"
  },
  "76798": {
   "gevonden": "2026-10-27T11:08:50+00:00",
-  "geopend": "2026-10-27T11:08:50+00:00",
-  "open": false,
+  "geopend": "2026-10-30T17:04:47+00:00",
+  "open": true,
   "tekst": "do 19 nov 13:00-17:00 Politieacademie Eindhoven (Licht Fysiek)",
   "dag": "2026-11-19"
  },
@@ -1153,5 +1153,12 @@
   "open": true,
   "tekst": "ma 09 nov 12:30-16:00 OBT Noord Nederland (Zwaar Fysiek)",
   "dag": "2026-11-09"
+ },
+ "76408": {
+  "gevonden": "2026-10-30T17:04:47+00:00",
+  "geopend": "2026-10-30T17:04:47+00:00",
+  "open": true,
+  "tekst": "wo 23 dec 08:00-15:00 Politieacademie Rotterdam (Regulier)",
+  "dag": "2026-12-23"
  }
 }
