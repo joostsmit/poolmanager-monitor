@@ -1146,5 +1146,12 @@
   "open": false,
   "tekst": "di 29 dec 10:00-17:00 Politieacademie Amsterdam (Regulier)",
   "dag": "2026-12-29"
+ },
+ "74002": {
+  "gevonden": "2026-10-30T17:01:09+00:00",
+  "geopend": "2026-10-30T17:01:09+00:00",
+  "open": true,
+  "tekst": "ma 09 nov 12:30-16:00 OBT Noord Nederland (Zwaar Fysiek)",
+  "dag": "2026-11-09"
  }
 }
