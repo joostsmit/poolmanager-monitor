@@ -1160,5 +1160,19 @@
   "open": false,
   "tekst": "wo 23 dec 08:00-15:00 Politieacademie Rotterdam (Regulier)",
   "dag": "2026-12-23"
+ },
+ "77056": {
+  "gevonden": "2026-11-02T08:40:52+00:00",
+  "geopend": "2026-11-02T08:40:52+00:00",
+  "open": true,
+  "tekst": "di 01 dec 12:30-16:00 OBT Rotterdam (Zwaar Fysiek)",
+  "dag": "2026-12-01"
+ },
+ "77057": {
+  "gevonden": "2026-11-02T08:40:52+00:00",
+  "geopend": "2026-11-02T08:40:52+00:00",
+  "open": true,
+  "tekst": "vr 04 dec 12:30-16:00 OBT Rotterdam (Zwaar Fysiek)",
+  "dag": "2026-12-04"
  }
 }
