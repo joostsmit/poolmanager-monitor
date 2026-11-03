@@ -1269,7 +1269,7 @@
  "77153": {
   "gevonden": "2026-11-03T14:04:45+00:00",
   "geopend": "2026-11-03T14:04:45+00:00",
-  "open": true,
+  "open": false,
   "tekst": "vr 27 nov 13:00-17:00 Politieacademie Apeldoorn (Licht Fysiek)",
   "dag": "2026-11-27"
  },
@@ -1304,7 +1304,7 @@
  "77161": {
   "gevonden": "2026-11-03T14:04:45+00:00",
   "geopend": "2026-11-03T14:04:45+00:00",
-  "open": true,
+  "open": false,
   "tekst": "ma 30 nov 10:00-12:00 Politieacademie Apeldoorn (Licht Fysiek)",
   "dag": "2026-11-30"
  },
