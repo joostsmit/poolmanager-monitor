@@ -128,8 +128,8 @@
  "75909": {
   "gevonden": "2026-10-12T10:10:25+00:00",
   "tekst": "di 17 nov 08:30-12:30 Politieacademie Leusden (Regulier Engels)",
-  "open": false,
-  "geopend": "2026-11-03T09:56:47+00:00",
+  "open": true,
+  "geopend": "2026-11-03T14:04:45+00:00",
   "dag": "2026-11-17"
  },
  "75913": {
@@ -1065,8 +1065,8 @@
  },
  "74004": {
   "gevonden": "2026-10-29T11:20:48+00:00",
-  "geopend": "2026-10-29T12:24:45+00:00",
-  "open": false,
+  "geopend": "2026-11-03T14:04:45+00:00",
+  "open": true,
   "tekst": "ma 23 nov 12:30-16:00 OBT Noord Nederland (Zwaar Fysiek)",
   "dag": "2026-11-23"
  },
@@ -1142,8 +1142,8 @@
  },
  "74002": {
   "gevonden": "2026-10-30T17:01:09+00:00",
-  "geopend": "2026-11-03T10:56:42+00:00",
-  "open": false,
+  "geopend": "2026-11-03T14:04:45+00:00",
+  "open": true,
   "tekst": "ma 09 nov 12:30-16:00 OBT Noord Nederland (Zwaar Fysiek)",
   "dag": "2026-11-09"
  },
@@ -1181,5 +1181,145 @@
   "open": false,
   "tekst": "vr 04 dec 08:00-14:00 Politieacademie Amsterdam (Gespecialiseerd BPO)",
   "dag": "2026-12-04"
+ },
+ "77136": {
+  "gevonden": "2026-11-03T14:04:45+00:00",
+  "geopend": "2026-11-03T14:04:45+00:00",
+  "open": true,
+  "tekst": "ma 23 nov 08:00-10:00 Politieacademie Apeldoorn (Regulier)",
+  "dag": "2026-11-23"
+ },
+ "77133": {
+  "gevonden": "2026-11-03T14:04:45+00:00",
+  "geopend": "2026-11-03T14:04:45+00:00",
+  "open": true,
+  "tekst": "ma 23 nov 08:00-12:00 Politieacademie Apeldoorn (Regulier)",
+  "dag": "2026-11-23"
+ },
+ "77129": {
+  "gevonden": "2026-11-03T14:04:45+00:00",
+  "geopend": "2026-11-03T14:04:45+00:00",
+  "open": true,
+  "tekst": "ma 23 nov 10:00-12:00 Politieacademie Apeldoorn (Licht Fysiek)",
+  "dag": "2026-11-23"
+ },
+ "77137": {
+  "gevonden": "2026-11-03T14:04:45+00:00",
+  "geopend": "2026-11-03T14:04:45+00:00",
+  "open": true,
+  "tekst": "ma 23 nov 10:00-15:00 Politieacademie Apeldoorn (Regulier)",
+  "dag": "2026-11-23"
+ },
+ "77134": {
+  "gevonden": "2026-11-03T14:04:45+00:00",
+  "geopend": "2026-11-03T14:04:45+00:00",
+  "open": true,
+  "tekst": "ma 23 nov 13:00-15:00 Politieacademie Apeldoorn (Regulier)",
+  "dag": "2026-11-23"
+ },
+ "77131": {
+  "gevonden": "2026-11-03T14:04:45+00:00",
+  "geopend": "2026-11-03T14:04:45+00:00",
+  "open": true,
+  "tekst": "ma 23 nov 13:00-17:00 Politieacademie Apeldoorn (Licht Fysiek)",
+  "dag": "2026-11-23"
+ },
+ "77165": {
+  "gevonden": "2026-11-03T14:04:45+00:00",
+  "geopend": "2026-11-03T14:04:45+00:00",
+  "open": true,
+  "tekst": "ma 23 nov 13:00-17:00 Politieacademie Apeldoorn (Licht Fysiek)",
+  "dag": "2026-11-23"
+ },
+ "77130": {
+  "gevonden": "2026-11-03T14:04:45+00:00",
+  "geopend": "2026-11-03T14:04:45+00:00",
+  "open": true,
+  "tekst": "ma 23 nov 13:00-17:00 Politieacademie Apeldoorn (Licht Fysiek)",
+  "dag": "2026-11-23"
+ },
+ "77132": {
+  "gevonden": "2026-11-03T14:04:45+00:00",
+  "geopend": "2026-11-03T14:04:45+00:00",
+  "open": true,
+  "tekst": "ma 23 nov 13:00-17:00 Politieacademie Apeldoorn (Licht Fysiek)",
+  "dag": "2026-11-23"
+ },
+ "77142": {
+  "gevonden": "2026-11-03T14:04:45+00:00",
+  "geopend": "2026-11-03T14:04:45+00:00",
+  "open": true,
+  "tekst": "wo 25 nov 08:00-12:00 Politieacademie Apeldoorn (Licht Fysiek)",
+  "dag": "2026-11-25"
+ },
+ "77144": {
+  "gevonden": "2026-11-03T14:04:45+00:00",
+  "geopend": "2026-11-03T14:04:45+00:00",
+  "open": true,
+  "tekst": "wo 25 nov 08:00-12:00 Politieacademie Apeldoorn (Licht Fysiek)",
+  "dag": "2026-11-25"
+ },
+ "77157": {
+  "gevonden": "2026-11-03T14:04:45+00:00",
+  "geopend": "2026-11-03T14:04:45+00:00",
+  "open": true,
+  "tekst": "vr 27 nov 08:00-10:00 Politieacademie Apeldoorn (Regulier)",
+  "dag": "2026-11-27"
+ },
+ "77153": {
+  "gevonden": "2026-11-03T14:04:45+00:00",
+  "geopend": "2026-11-03T14:04:45+00:00",
+  "open": true,
+  "tekst": "vr 27 nov 13:00-17:00 Politieacademie Apeldoorn (Licht Fysiek)",
+  "dag": "2026-11-27"
+ },
+ "77155": {
+  "gevonden": "2026-11-03T14:04:45+00:00",
+  "geopend": "2026-11-03T14:04:45+00:00",
+  "open": true,
+  "tekst": "vr 27 nov 13:00-17:00 Politieacademie Apeldoorn (Licht Fysiek)",
+  "dag": "2026-11-27"
+ },
+ "77160": {
+  "gevonden": "2026-11-03T14:04:45+00:00",
+  "geopend": "2026-11-03T14:04:45+00:00",
+  "open": true,
+  "tekst": "ma 30 nov 08:00-10:00 Politieacademie Apeldoorn (Licht Fysiek)",
+  "dag": "2026-11-30"
+ },
+ "77162": {
+  "gevonden": "2026-11-03T14:04:45+00:00",
+  "geopend": "2026-11-03T14:04:45+00:00",
+  "open": true,
+  "tekst": "ma 30 nov 08:00-12:00 Politieacademie Apeldoorn (Regulier)",
+  "dag": "2026-11-30"
+ },
+ "77164": {
+  "gevonden": "2026-11-03T14:04:45+00:00",
+  "geopend": "2026-11-03T14:04:45+00:00",
+  "open": true,
+  "tekst": "ma 30 nov 08:00-12:00 Politieacademie Apeldoorn (Regulier)",
+  "dag": "2026-11-30"
+ },
+ "77161": {
+  "gevonden": "2026-11-03T14:04:45+00:00",
+  "geopend": "2026-11-03T14:04:45+00:00",
+  "open": true,
+  "tekst": "ma 30 nov 10:00-12:00 Politieacademie Apeldoorn (Licht Fysiek)",
+  "dag": "2026-11-30"
+ },
+ "77158": {
+  "gevonden": "2026-11-03T14:04:45+00:00",
+  "geopend": "2026-11-03T14:04:45+00:00",
+  "open": true,
+  "tekst": "ma 30 nov 10:00-15:00 Politieacademie Apeldoorn (Licht Fysiek)",
+  "dag": "2026-11-30"
+ },
+ "77163": {
+  "gevonden": "2026-11-03T14:04:45+00:00",
+  "geopend": "2026-11-03T14:04:45+00:00",
+  "open": true,
+  "tekst": "ma 30 nov 13:00-17:00 Politieacademie Apeldoorn (Regulier)",
+  "dag": "2026-11-30"
  }
 }
