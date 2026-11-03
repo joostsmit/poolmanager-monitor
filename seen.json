@@ -1167,5 +1167,12 @@
   "open": false,
   "tekst": "vr 04 dec 12:30-16:00 OBT Rotterdam (Zwaar Fysiek)",
   "dag": "2026-12-04"
+ },
+ "77108": {
+  "gevonden": "2026-11-03T06:24:43+00:00",
+  "geopend": "2026-11-03T06:24:43+00:00",
+  "open": true,
+  "tekst": "do 19 nov 08:00-15:00 Politieacademie Amsterdam (Licht Fysiek)",
+  "dag": "2026-11-19"
  }
 }
