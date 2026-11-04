@@ -128,7 +128,7 @@
  "75909": {
   "gevonden": "2026-10-12T10:10:25+00:00",
   "tekst": "di 17 nov 08:30-12:30 Politieacademie Leusden (Regulier Engels)",
-  "open": true,
+  "open": false,
   "geopend": "2026-11-04T14:20:49+00:00",
   "dag": "2026-11-17"
  },
@@ -1325,7 +1325,7 @@
  "77173": {
   "gevonden": "2026-11-04T14:20:49+00:00",
   "geopend": "2026-11-04T14:20:49+00:00",
-  "open": true,
+  "open": false,
   "tekst": "di 01 dec 13:00-17:00 Politieacademie Apeldoorn (Licht Fysiek)",
   "dag": "2026-12-01"
  },
@@ -1367,7 +1367,7 @@
  "77183": {
   "gevonden": "2026-11-04T14:20:49+00:00",
   "geopend": "2026-11-04T14:20:49+00:00",
-  "open": true,
+  "open": false,
   "tekst": "vr 04 dec 10:00-12:00 Politieacademie Apeldoorn (Licht Fysiek)",
   "dag": "2026-12-04"
  },
