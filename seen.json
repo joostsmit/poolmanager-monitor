@@ -128,7 +128,7 @@
  "75909": {
   "gevonden": "2026-10-12T10:10:25+00:00",
   "tekst": "di 17 nov 08:30-12:30 Politieacademie Leusden (Regulier Engels)",
-  "open": true,
+  "open": false,
   "geopend": "2026-11-03T14:04:45+00:00",
   "dag": "2026-11-17"
  },
@@ -1143,7 +1143,7 @@
  "74002": {
   "gevonden": "2026-10-30T17:01:09+00:00",
   "geopend": "2026-11-03T14:04:45+00:00",
-  "open": true,
+  "open": false,
   "tekst": "ma 09 nov 12:30-16:00 OBT Noord Nederland (Zwaar Fysiek)",
   "dag": "2026-11-09"
  },
