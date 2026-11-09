@@ -345,8 +345,8 @@
  "71741": {
   "gevonden": "2026-10-12T14:20:30+00:00",
   "tekst": "di 10 nov 12:00-16:30 PA Ossendrecht Conflict en Crisis b (Licht Fysiek)",
-  "open": false,
-  "geopend": "2026-11-06T12:36:45+00:00",
+  "open": true,
+  "geopend": "2026-11-09T13:44:45+00:00",
   "dag": "2026-11-10"
  },
  "76156": {
@@ -1429,16 +1429,135 @@
  },
  "75623": {
   "gevonden": "2026-11-06T08:32:45+00:00",
-  "geopend": "2026-11-06T15:24:48+00:00",
-  "open": false,
+  "geopend": "2026-11-09T13:44:45+00:00",
+  "open": true,
   "tekst": "di 10 nov 13:00-15:00 Politieacademie Amsterdam (Licht Fysiek)",
   "dag": "2026-11-10"
  },
  "75328": {
   "gevonden": "2026-11-09T06:08:42+00:00",
-  "geopend": "2026-11-09T09:28:44+00:00",
-  "open": false,
+  "geopend": "2026-11-09T13:44:45+00:00",
+  "open": true,
   "tekst": "di 10 nov 12:00-16:00 OBT Oost Brabant (Zwaar Fysiek)",
   "dag": "2026-11-10"
+ },
+ "77362": {
+  "gevonden": "2026-11-09T13:44:45+00:00",
+  "geopend": "2026-11-09T13:44:45+00:00",
+  "open": true,
+  "tekst": "vr 08 jan 08:00-10:00 Politieacademie Apeldoorn (Regulier)",
+  "dag": "2027-01-08"
+ },
+ "77361": {
+  "gevonden": "2026-11-09T13:44:45+00:00",
+  "geopend": "2026-11-09T13:44:45+00:00",
+  "open": true,
+  "tekst": "vr 08 jan 10:00-12:00 Politieacademie Apeldoorn (Regulier)",
+  "dag": "2027-01-08"
+ },
+ "77368": {
+  "gevonden": "2026-11-09T13:44:45+00:00",
+  "geopend": "2026-11-09T13:44:45+00:00",
+  "open": true,
+  "tekst": "vr 08 jan 12:30-16:00 Politieacademie Apeldoorn (Regulier)",
+  "dag": "2027-01-08"
+ },
+ "77408": {
+  "gevonden": "2026-11-09T13:44:45+00:00",
+  "geopend": "2026-11-09T13:44:45+00:00",
+  "open": true,
+  "tekst": "wo 20 jan 08:00-12:00 Politieacademie Apeldoorn (Regulier Engels)",
+  "dag": "2027-01-20"
+ },
+ "77410": {
+  "gevonden": "2026-11-09T13:44:45+00:00",
+  "geopend": "2026-11-09T13:44:45+00:00",
+  "open": true,
+  "tekst": "wo 20 jan 08:00-12:00 Politieacademie Apeldoorn (Zwaar Fysiek)",
+  "dag": "2027-01-20"
+ },
+ "77409": {
+  "gevonden": "2026-11-09T13:44:45+00:00",
+  "geopend": "2026-11-09T13:44:45+00:00",
+  "open": true,
+  "tekst": "wo 20 jan 13:00-17:00 Politieacademie Apeldoorn (Regulier)",
+  "dag": "2027-01-20"
+ },
+ "77411": {
+  "gevonden": "2026-11-09T13:44:45+00:00",
+  "geopend": "2026-11-09T13:44:45+00:00",
+  "open": true,
+  "tekst": "wo 20 jan 13:00-17:00 Politieacademie Apeldoorn (Zwaar Fysiek)",
+  "dag": "2027-01-20"
+ },
+ "77412": {
+  "gevonden": "2026-11-09T13:44:45+00:00",
+  "geopend": "2026-11-09T13:44:45+00:00",
+  "open": true,
+  "tekst": "do 21 jan 08:00-12:00 Politieacademie Apeldoorn (Regulier Engels)",
+  "dag": "2027-01-21"
+ },
+ "77414": {
+  "gevonden": "2026-11-09T13:44:45+00:00",
+  "geopend": "2026-11-09T13:44:45+00:00",
+  "open": true,
+  "tekst": "do 21 jan 08:00-12:00 Politieacademie Apeldoorn (Zwaar Fysiek)",
+  "dag": "2027-01-21"
+ },
+ "77413": {
+  "gevonden": "2026-11-09T13:44:45+00:00",
+  "geopend": "2026-11-09T13:44:45+00:00",
+  "open": true,
+  "tekst": "do 21 jan 15:00-17:00 Politieacademie Apeldoorn (Regulier)",
+  "dag": "2027-01-21"
+ },
+ "77417": {
+  "gevonden": "2026-11-09T13:44:45+00:00",
+  "geopend": "2026-11-09T13:44:45+00:00",
+  "open": true,
+  "tekst": "vr 22 jan 08:00-10:00 Politieacademie Apeldoorn (Regulier)",
+  "dag": "2027-01-22"
+ },
+ "77415": {
+  "gevonden": "2026-11-09T13:44:45+00:00",
+  "geopend": "2026-11-09T13:44:45+00:00",
+  "open": true,
+  "tekst": "vr 22 jan 08:00-12:00 Politieacademie Apeldoorn (Regulier Engels)",
+  "dag": "2027-01-22"
+ },
+ "77419": {
+  "gevonden": "2026-11-09T13:44:45+00:00",
+  "geopend": "2026-11-09T13:44:45+00:00",
+  "open": true,
+  "tekst": "vr 22 jan 08:00-12:00 Politieacademie Apeldoorn (Zwaar Fysiek)",
+  "dag": "2027-01-22"
+ },
+ "77418": {
+  "gevonden": "2026-11-09T13:44:45+00:00",
+  "geopend": "2026-11-09T13:44:45+00:00",
+  "open": true,
+  "tekst": "vr 22 jan 13:00-15:00 Politieacademie Apeldoorn (Regulier)",
+  "dag": "2027-01-22"
+ },
+ "77416": {
+  "gevonden": "2026-11-09T13:44:45+00:00",
+  "geopend": "2026-11-09T13:44:45+00:00",
+  "open": true,
+  "tekst": "vr 22 jan 13:00-16:00 Politieacademie Apeldoorn (Regulier)",
+  "dag": "2027-01-22"
+ },
+ "77422": {
+  "gevonden": "2026-11-09T13:44:45+00:00",
+  "geopend": "2026-11-09T13:44:45+00:00",
+  "open": true,
+  "tekst": "di 26 jan 12:30-16:30 Politieacademie Apeldoorn (Regulier)",
+  "dag": "2027-01-26"
+ },
+ "77423": {
+  "gevonden": "2026-11-09T13:44:45+00:00",
+  "geopend": "2026-11-09T13:44:45+00:00",
+  "open": true,
+  "tekst": "di 26 jan 13:00-17:00 Politieacademie Apeldoorn (Regulier)",
+  "dag": "2027-01-26"
  }
 }
