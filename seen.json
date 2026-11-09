@@ -1465,7 +1465,7 @@
  "77408": {
   "gevonden": "2026-11-09T13:44:45+00:00",
   "geopend": "2026-11-09T13:44:45+00:00",
-  "open": true,
+  "open": false,
   "tekst": "wo 20 jan 08:00-12:00 Politieacademie Apeldoorn (Regulier Engels)",
   "dag": "2027-01-20"
  },
@@ -1479,7 +1479,7 @@
  "77409": {
   "gevonden": "2026-11-09T13:44:45+00:00",
   "geopend": "2026-11-09T13:44:45+00:00",
-  "open": true,
+  "open": false,
   "tekst": "wo 20 jan 13:00-17:00 Politieacademie Apeldoorn (Regulier)",
   "dag": "2027-01-20"
  },
@@ -1521,7 +1521,7 @@
  "77415": {
   "gevonden": "2026-11-09T13:44:45+00:00",
   "geopend": "2026-11-09T13:44:45+00:00",
-  "open": true,
+  "open": false,
   "tekst": "vr 22 jan 08:00-12:00 Politieacademie Apeldoorn (Regulier Engels)",
   "dag": "2027-01-22"
  },
@@ -1542,14 +1542,14 @@
  "77416": {
   "gevonden": "2026-11-09T13:44:45+00:00",
   "geopend": "2026-11-09T13:44:45+00:00",
-  "open": true,
+  "open": false,
   "tekst": "vr 22 jan 13:00-16:00 Politieacademie Apeldoorn (Regulier)",
   "dag": "2027-01-22"
  },
  "77422": {
   "gevonden": "2026-11-09T13:44:45+00:00",
   "geopend": "2026-11-09T13:44:45+00:00",
-  "open": true,
+  "open": false,
   "tekst": "di 26 jan 12:30-16:30 Politieacademie Apeldoorn (Regulier)",
   "dag": "2027-01-26"
  },
