@@ -345,7 +345,7 @@
  "71741": {
   "gevonden": "2026-10-12T14:20:30+00:00",
   "tekst": "di 10 nov 12:00-16:30 PA Ossendrecht Conflict en Crisis b (Licht Fysiek)",
-  "open": true,
+  "open": false,
   "geopend": "2026-11-06T12:36:45+00:00",
   "dag": "2026-11-10"
  },
@@ -1136,7 +1136,7 @@
  "74002": {
   "gevonden": "2026-10-30T17:01:09+00:00",
   "geopend": "2026-11-06T14:20:48+00:00",
-  "open": true,
+  "open": false,
   "tekst": "ma 09 nov 12:30-16:00 OBT Noord Nederland (Zwaar Fysiek)",
   "dag": "2026-11-09"
  },
@@ -1430,14 +1430,14 @@
  "75623": {
   "gevonden": "2026-11-06T08:32:45+00:00",
   "geopend": "2026-11-06T15:24:48+00:00",
-  "open": true,
+  "open": false,
   "tekst": "di 10 nov 13:00-15:00 Politieacademie Amsterdam (Licht Fysiek)",
   "dag": "2026-11-10"
  },
  "75328": {
   "gevonden": "2026-11-09T06:08:42+00:00",
   "geopend": "2026-11-09T09:28:44+00:00",
-  "open": true,
+  "open": false,
   "tekst": "di 10 nov 12:00-16:00 OBT Oost Brabant (Zwaar Fysiek)",
   "dag": "2026-11-10"
  }
