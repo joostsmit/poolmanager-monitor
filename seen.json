@@ -1514,7 +1514,7 @@
  "77417": {
   "gevonden": "2026-11-09T13:44:45+00:00",
   "geopend": "2026-11-09T13:44:45+00:00",
-  "open": true,
+  "open": false,
   "tekst": "vr 22 jan 08:00-10:00 Politieacademie Apeldoorn (Regulier)",
   "dag": "2027-01-22"
  },
@@ -1556,7 +1556,7 @@
  "77423": {
   "gevonden": "2026-11-09T13:44:45+00:00",
   "geopend": "2026-11-09T13:44:45+00:00",
-  "open": true,
+  "open": false,
   "tekst": "di 26 jan 13:00-17:00 Politieacademie Apeldoorn (Regulier)",
   "dag": "2027-01-26"
  }
