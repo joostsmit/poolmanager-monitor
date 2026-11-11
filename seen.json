@@ -41,13 +41,6 @@
   "geopend": "2026-10-16T15:05:24+00:00",
   "dag": "2026-12-16"
  },
- "75898": {
-  "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "wo 04 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier Engels)",
-  "open": false,
-  "geopend": "2026-10-12T10:10:25+00:00",
-  "dag": "2026-11-04"
- },
  "75899": {
   "gevonden": "2026-10-12T10:10:25+00:00",
   "tekst": "ma 09 nov 08:30-12:30 Politieacademie Leusden (Regulier Engels)",
@@ -362,20 +355,6 @@
   "open": false,
   "tekst": "do 19 nov 12:30-16:00 OBT Oost Nederland (Zwaar Fysiek)",
   "dag": "2026-11-19"
- },
- "76178": {
-  "gevonden": "2026-10-15T12:20:34+00:00",
-  "geopend": "2026-10-15T12:20:34+00:00",
-  "open": false,
-  "tekst": "wo 04 nov 08:00-12:00 Politieacademie Den Haag (Regulier Engels)",
-  "dag": "2026-11-04"
- },
- "76179": {
-  "gevonden": "2026-10-15T12:20:34+00:00",
-  "geopend": "2026-10-15T12:20:34+00:00",
-  "open": false,
-  "tekst": "wo 04 nov 12:30-16:30 Politieacademie Den Haag (Regulier Engels)",
-  "dag": "2026-11-04"
  },
  "76180": {
   "gevonden": "2026-10-15T12:20:34+00:00",
