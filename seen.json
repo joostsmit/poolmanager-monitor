@@ -41,13 +41,6 @@
   "geopend": "2026-10-16T15:05:24+00:00",
   "dag": "2026-12-16"
  },
- "75899": {
-  "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "ma 09 nov 08:30-12:30 Politieacademie Leusden (Regulier Engels)",
-  "open": false,
-  "geopend": "2026-10-23T09:48:49+00:00",
-  "dag": "2026-11-09"
- },
  "75900": {
   "gevonden": "2026-10-12T10:10:25+00:00",
   "tekst": "di 10 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier Engels)",
@@ -327,13 +320,6 @@
   "open": false,
   "geopend": "2026-11-09T13:44:45+00:00",
   "dag": "2026-11-10"
- },
- "76156": {
-  "gevonden": "2026-10-13T10:00:47+00:00",
-  "tekst": "ma 09 nov 08:30-12:30 Politieacademie Leusden (Licht Fysiek)",
-  "open": false,
-  "geopend": "2026-10-13T10:00:47+00:00",
-  "dag": "2026-11-09"
  },
  "76158": {
   "gevonden": "2026-10-13T10:20:27+00:00",
@@ -656,13 +642,6 @@
   "open": false,
   "tekst": "wo 30 dec 13:00-17:00 Politieacademie Rotterdam (Regulier)",
   "dag": "2026-12-30"
- },
- "76675": {
-  "gevonden": "2026-10-26T09:16:47+00:00",
-  "geopend": "2026-10-26T09:16:47+00:00",
-  "open": false,
-  "tekst": "ma 09 nov 08:00-10:00 Politieacademie Amsterdam (Regulier Engels)",
-  "dag": "2026-11-09"
  },
  "76676": {
   "gevonden": "2026-10-26T09:16:47+00:00",
@@ -1083,13 +1062,6 @@
   "open": false,
   "tekst": "di 29 dec 10:00-17:00 Politieacademie Amsterdam (Regulier)",
   "dag": "2026-12-29"
- },
- "74002": {
-  "gevonden": "2026-10-30T17:01:09+00:00",
-  "geopend": "2026-11-06T14:20:48+00:00",
-  "open": false,
-  "tekst": "ma 09 nov 12:30-16:00 OBT Noord Nederland (Zwaar Fysiek)",
-  "dag": "2026-11-09"
  },
  "76408": {
   "gevonden": "2026-10-30T17:04:47+00:00",
