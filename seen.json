@@ -41,13 +41,6 @@
   "geopend": "2026-10-16T15:05:24+00:00",
   "dag": "2026-12-16"
  },
- "75900": {
-  "gevonden": "2026-10-12T10:10:25+00:00",
-  "tekst": "di 10 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier Engels)",
-  "open": false,
-  "geopend": "2026-10-12T10:10:25+00:00",
-  "dag": "2026-11-10"
- },
  "75907": {
   "gevonden": "2026-10-12T10:10:25+00:00",
   "tekst": "ma 16 november 2026 08:30-12:30 - Politieacademie Leusden (Inplanbaar Regulier)",
@@ -313,13 +306,6 @@
   "open": false,
   "geopend": "2026-10-12T10:10:25+00:00",
   "dag": "2026-12-21"
- },
- "71741": {
-  "gevonden": "2026-10-12T14:20:30+00:00",
-  "tekst": "di 10 nov 12:00-16:30 PA Ossendrecht Conflict en Crisis b (Licht Fysiek)",
-  "open": false,
-  "geopend": "2026-11-09T13:44:45+00:00",
-  "dag": "2026-11-10"
  },
  "76158": {
   "gevonden": "2026-10-13T10:20:27+00:00",
@@ -643,13 +629,6 @@
   "tekst": "wo 30 dec 13:00-17:00 Politieacademie Rotterdam (Regulier)",
   "dag": "2026-12-30"
  },
- "76676": {
-  "gevonden": "2026-10-26T09:16:47+00:00",
-  "geopend": "2026-10-26T09:16:47+00:00",
-  "open": false,
-  "tekst": "di 10 nov 13:00-17:00 Politieacademie Amsterdam (Regulier Engels)",
-  "dag": "2026-11-10"
- },
  "76677": {
   "gevonden": "2026-10-26T09:16:47+00:00",
   "geopend": "2026-10-26T09:16:47+00:00",
@@ -964,20 +943,6 @@
   "open": false,
   "tekst": "wo 18 nov 15:00-17:00 Politieacademie Apeldoorn (Regulier)",
   "dag": "2026-11-18"
- },
- "76287": {
-  "gevonden": "2026-10-27T15:40:51+00:00",
-  "geopend": "2026-10-27T15:40:51+00:00",
-  "open": false,
-  "tekst": "di 10 nov 10:00-12:00 Politieacademie Rotterdam (Regulier Engels)",
-  "dag": "2026-11-10"
- },
- "75622": {
-  "gevonden": "2026-10-27T15:40:51+00:00",
-  "geopend": "2026-10-27T15:40:51+00:00",
-  "open": false,
-  "tekst": "di 10 nov 13:00-15:00 Politieacademie Amsterdam (Licht Fysiek)",
-  "dag": "2026-11-10"
  },
  "76967": {
   "gevonden": "2026-10-28T13:36:47+00:00",
@@ -1349,20 +1314,6 @@
   "open": false,
   "tekst": "di 29 dec 13:00-17:00 Politieacademie Apeldoorn (Regulier)",
   "dag": "2026-12-29"
- },
- "75623": {
-  "gevonden": "2026-11-06T08:32:45+00:00",
-  "geopend": "2026-11-09T13:44:45+00:00",
-  "open": false,
-  "tekst": "di 10 nov 13:00-15:00 Politieacademie Amsterdam (Licht Fysiek)",
-  "dag": "2026-11-10"
- },
- "75328": {
-  "gevonden": "2026-11-09T06:08:42+00:00",
-  "geopend": "2026-11-09T13:44:45+00:00",
-  "open": false,
-  "tekst": "di 10 nov 12:00-16:00 OBT Oost Brabant (Zwaar Fysiek)",
-  "dag": "2026-11-10"
  },
  "77362": {
   "gevonden": "2026-11-09T13:44:45+00:00",
