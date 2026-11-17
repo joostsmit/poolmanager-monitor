@@ -1482,5 +1482,19 @@
   "open": false,
   "tekst": "di 26 jan 13:00-17:00 Politieacademie Apeldoorn (Regulier)",
   "dag": "2027-01-26"
+ },
+ "77651": {
+  "gevonden": "2026-11-17T10:12:43+00:00",
+  "geopend": "2026-11-17T10:12:43+00:00",
+  "open": true,
+  "tekst": "ma 23 nov 07:45-15:00 Politieacademie Amsterdam (Regulier)",
+  "dag": "2026-11-23"
+ },
+ "77652": {
+  "gevonden": "2026-11-17T10:12:43+00:00",
+  "geopend": "2026-11-17T10:12:43+00:00",
+  "open": true,
+  "tekst": "ma 30 nov 07:45-15:00 Politieacademie Amsterdam (Regulier)",
+  "dag": "2026-11-30"
  }
 }
