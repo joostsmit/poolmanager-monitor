@@ -1475,5 +1475,12 @@
   "open": false,
   "tekst": "vr 27 nov 12:00-15:30 OBT Sectorleiding (Zwaar Fysiek)",
   "dag": "2026-11-27"
+ },
+ "76184": {
+  "gevonden": "2026-11-18T06:08:58+00:00",
+  "geopend": "2026-11-18T06:08:58+00:00",
+  "open": true,
+  "tekst": "do 19 nov 08:00-12:00 Politieacademie Den Haag (Licht Fysiek)",
+  "dag": "2026-11-19"
  }
 }
