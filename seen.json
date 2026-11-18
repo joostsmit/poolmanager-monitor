@@ -16,7 +16,7 @@
  "75885": {
   "gevonden": "2026-10-09T13:35:18+00:00",
   "tekst": "do 19 nov 12:00-15:30 OBT Oost Nederland (Zwaar Fysiek)",
-  "open": true,
+  "open": false,
   "geopend": "2026-11-18T08:32:44+00:00",
   "dag": "2026-11-19"
  },
@@ -1481,6 +1481,13 @@
   "geopend": "2026-11-18T06:08:58+00:00",
   "open": false,
   "tekst": "do 19 nov 08:00-12:00 Politieacademie Den Haag (Licht Fysiek)",
+  "dag": "2026-11-19"
+ },
+ "77688": {
+  "gevonden": "2026-11-18T09:48:45+00:00",
+  "geopend": "2026-11-18T09:48:45+00:00",
+  "open": true,
+  "tekst": "do 19 nov 12:00-15:30 OBT Oost Nederland (Licht Fysiek)",
   "dag": "2026-11-19"
  }
 }
