@@ -1489,5 +1489,26 @@
   "open": false,
   "tekst": "do 26 nov 11:30-15:30 OBT Landelijke Eenheid (Zwaar Fysiek)",
   "dag": "2026-11-26"
+ },
+ "77769": {
+  "gevonden": "2026-11-19T11:04:45+00:00",
+  "geopend": "2026-11-19T11:04:45+00:00",
+  "open": true,
+  "tekst": "do 21 jan 08:00-12:00 Politieacademie Rotterdam (Regulier Engels)",
+  "dag": "2027-01-21"
+ },
+ "76508": {
+  "gevonden": "2026-11-19T11:04:45+00:00",
+  "geopend": "2026-11-19T11:04:45+00:00",
+  "open": true,
+  "tekst": "do 21 jan 18:00-22:00 Politieacademie Rotterdam (Zwaar Fysiek)",
+  "dag": "2027-01-21"
+ },
+ "77770": {
+  "gevonden": "2026-11-19T11:04:45+00:00",
+  "geopend": "2026-11-19T11:04:45+00:00",
+  "open": true,
+  "tekst": "do 21 jan 18:00-22:00 Politieacademie Rotterdam (Zwaar Fysiek)",
+  "dag": "2027-01-21"
  }
 }
