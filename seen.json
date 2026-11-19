@@ -1510,5 +1510,12 @@
   "open": false,
   "tekst": "do 21 jan 18:00-22:00 Politieacademie Rotterdam (Zwaar Fysiek)",
   "dag": "2027-01-21"
+ },
+ "77780": {
+  "gevonden": "2026-11-19T14:52:45+00:00",
+  "geopend": "2026-11-19T14:52:45+00:00",
+  "open": true,
+  "tekst": "ma 14 dec 09:00-17:00 HRM ON (Licht Fysiek)",
+  "dag": "2026-12-14"
  }
 }
