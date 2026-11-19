@@ -653,7 +653,7 @@
  "76686": {
   "gevonden": "2026-10-26T09:16:47+00:00",
   "geopend": "2026-11-19T09:01:12+00:00",
-  "open": true,
+  "open": false,
   "tekst": "ma 23 nov 08:00-12:00 Politieacademie Amsterdam (Regulier)",
   "dag": "2026-11-23"
  },
@@ -667,7 +667,7 @@
  "76688": {
   "gevonden": "2026-10-26T09:16:47+00:00",
   "geopend": "2026-11-19T09:01:12+00:00",
-  "open": true,
+  "open": false,
   "tekst": "ma 23 nov 13:00-17:00 Politieacademie Amsterdam (Licht Fysiek)",
   "dag": "2026-11-23"
  },
