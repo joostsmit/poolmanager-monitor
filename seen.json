@@ -1510,5 +1510,12 @@
   "open": false,
   "tekst": "ma 14 dec 09:00-17:00 HRM ON (Licht Fysiek)",
   "dag": "2026-12-14"
+ },
+ "77426": {
+  "gevonden": "2026-11-20T16:32:48+00:00",
+  "geopend": "2026-11-20T16:32:48+00:00",
+  "open": true,
+  "tekst": "di 26 jan 12:00-16:30 PA Ossendrecht Conflict en Crisis b (Licht Fysiek)",
+  "dag": "2027-01-26"
  }
 }
